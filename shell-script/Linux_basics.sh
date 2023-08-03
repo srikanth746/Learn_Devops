@@ -8,6 +8,4 @@ sleep 10&
 lsblk
 uname -i
 ps -u
-ps -ef
-yum install python3 -y
-yum update python3 -y
+yum remove python3 -y

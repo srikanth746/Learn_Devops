@@ -2,6 +2,9 @@ Hi,
 
 This is the introduction to shell scripting
 
-we will learn the new topics of shell scripting here and push our code to git
+we will learn the new topics of shell scripting here and push our code to git to make a proper VCS.
 
-to make a proper VCS.
+List of topics that will be covered here in shell scripting.
+
+1). Introdution to Linux
+

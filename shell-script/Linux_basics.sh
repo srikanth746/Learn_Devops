@@ -3,7 +3,7 @@ pwd
 ls -la
 vi file2.txt
 cat file2.txt
-sleep 10&
+sleep 10 &
 lsblk
 uname -i
 ps -u

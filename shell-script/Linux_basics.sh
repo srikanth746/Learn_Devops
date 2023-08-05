@@ -16,7 +16,7 @@ cat -n file2.txt
 head -2 file2.txt
 tail -3 file2.txt | grep ^H
 awk '{print $1}' /etc/passwd
-find "*srikanth*" file2.txt
+find "*sri*" file2.txt
 cp -r file2.txt file1.txt
 mv file1.txt sample.txt
 chmod u+rwx sample.txt

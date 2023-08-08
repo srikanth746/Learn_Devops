@@ -1,12 +1,12 @@
+
+cp user.service /etc/systemd/system/user.service
+cp mongo.repo /etc/yum.repos.d/mongo.repo
+
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
 yum install nodejs -y
 
 useradd roboshop
-
-cd user.service /etc/systemd/system/user.service
-
-cd mongo.repo /etc/yum.repos.d/mongo.repo
 
 mkdir /app
 
@@ -18,12 +18,11 @@ unzip /tmp/user.zip
 
 npm install
 
-systemctl daemon-reload
-
 yum install mongodb-org-shell -y
 
-mongo --host MONGODB-SERVER-IPADDRESS </app/schema/user.js
+mongo --host mongodb.srilearndevops.online </app/schema/user.js
 
+systemctl daemon-reload
 systemctl enable user
 systemctl restart user
 

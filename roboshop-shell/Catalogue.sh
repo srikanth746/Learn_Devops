@@ -21,7 +21,7 @@ unzip /tmp/catalogue.zip
 npm install
 
 
-mongo --host MONGODB-SERVER-IPADDRESS </app/schema/catalogue.js
+mongo --host mongodb.srilearndevops.online </app/schema/catalogue.js
 
 systemctl daemon-reload
 systemctl enable catalogue

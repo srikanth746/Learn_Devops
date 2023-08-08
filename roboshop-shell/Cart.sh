@@ -15,4 +15,4 @@ npm install
 
 systemctl daemon-reload
 systemctl enable cart
-systemctl start cart
+systemctl restart cart

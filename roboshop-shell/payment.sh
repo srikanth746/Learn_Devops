@@ -1,4 +1,4 @@
-cp Payment.service /etc/systemd/system/payment.service
+cp payment.service /etc/systemd/system/payment.service
 
 yum install python36 gcc python3-devel -y
 

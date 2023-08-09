@@ -1,4 +1,4 @@
-cp Dispatch.service /etc/systemd/system/dispatch.service
+cp dispatch.service /etc/systemd/system/dispatch.service
 
 yum install golang -y
 

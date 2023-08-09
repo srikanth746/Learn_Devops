@@ -6,7 +6,7 @@ Environment=MONGO=true
 Environment=REDIS_HOST=redis.srilearndevops.online
 Environment=MONGO_URL="mongodb://mongo.srilearndevops.online:27017/users"
 ExecStart=/bin/node /app/server.js
-SyslogIdentifier=user
+SyslogIdentifier=usersudo
 
 [Install]
 WantedBy=multi-user.target

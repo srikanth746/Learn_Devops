@@ -20,7 +20,7 @@ npm install
 
 yum install mongodb-org-shell -y
 
-mongo --host mongodb.srilearndevops.online </app/schema/user.js
+mongo --host mongo.srilearndevops.online </app/schema/user.js
 
 systemctl daemon-reload
 systemctl enable user

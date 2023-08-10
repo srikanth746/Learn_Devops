@@ -14,6 +14,7 @@ curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user.zip
 
 cd /app
 
+pwd
 unzip /tmp/user.zip
 
 npm install

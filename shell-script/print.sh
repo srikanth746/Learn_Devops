@@ -26,3 +26,7 @@ echo -e "\e[34mPrinting the start pattern in python\e[0m" | tee -a $location
 python3 sample1.py
 
 echo -e "\e[34mSuccessfully executed python script\e[0m" | tee -a $location
+
+echo -e "\e[31m Uninstalling the python and Nginx\e[0m" | tee -a $location
+yum remove nginx -y
+yum remove python3 -y

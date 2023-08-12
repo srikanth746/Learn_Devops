@@ -1,6 +1,6 @@
 echo "Practicing the print cmd and installing nginx"
 
-echo -e"\e[33Checking the nginx status\e[0m"
+echo -e "\e[33Checking the nginx status\e[0m"
 
 yum list installed | grep nginx
 

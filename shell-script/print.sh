@@ -4,7 +4,7 @@ yum list installed | grep nginx
 
 echo -e "\e[32mInstalling Nginx\e[0m"
 
-yum install nginx -y
+yum install nginx -y &>> /tmp/roboshop.log
 
 echo -e "\e[35mInstallation of nginx is completed\e[0m"
 
@@ -13,10 +13,10 @@ echo -e "\e[34mStarting the nginx web service\e[0m"
 systemctl start nginx
 
 echo -e "\e[35mChecking the status of nginx\e[0m"
-systemctl status nginx
+systemctl status nginx &>> /tmp/roboshop.log
 
 echo -e "\e[31mInstallation of python starts\e[0m"
-yum install python3 -y
+yum install python3 -y &>> /tmp/roboshop.log
 
 echo -e "\e[32mCreating and editing python file for execution\e[0m"
 touch sample1.py

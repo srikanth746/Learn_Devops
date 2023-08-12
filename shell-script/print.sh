@@ -22,7 +22,6 @@ yum install python3 -y &>> $location
 
 echo -e "\e[32mCreating and editing python file for execution\e[0m" | tee -a $location
 touch sample1.py
-vim sample1.py
 echo -e "\e[34mPrinting the start pattern in python\e[0m" | tee -a $location
 python3 sample1.py
 

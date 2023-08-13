@@ -5,7 +5,7 @@ yum install nginx -y &>> $Log_file_location
 echo -e "\e[34mCopying the roboshop frontend conf to a desired location" | tee -a $Log_file_location
 cp roboshop.conf /etc/nginx/default.d/roboshop.conf
 
-echo -e "\e[31mRemoving the default web server html" | tee -a $Log_file_location
+echo -e "\e[31mRemoving the default web server html\e[0m" | tee -a $Log_file_location
 rm -rf /usr/share/nginx/html/*
 
 echo -e "\e[34mDownloading the required roboshop content provided by DEV\e[0m" | tee -a $Log_file_location

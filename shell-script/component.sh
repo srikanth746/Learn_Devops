@@ -1,7 +1,7 @@
 frontend(){
-  yum install nginx -y
-  systemctl enable nginx
-  systemctl start nginx
+  yum install ${component} -y
+  systemctl enable ${component}
+  systemctl start ${component}
 
   rm -rf /usr/share/nginx/html/*
 

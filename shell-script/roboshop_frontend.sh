@@ -1,3 +1,3 @@
 component=nginx
-source component.sh
-frontend
+source common.sh
+func_frontend

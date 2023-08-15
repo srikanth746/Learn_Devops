@@ -240,3 +240,22 @@ func_shipping(){
   echo -e "\e[31m Status of the shipping service\e[0m" | tee -a $Log_file_location
   systemctl status shipping ; tail -f /var/log/messages &>> $Log_file_location
 }
+
+func_rabbitMQ(){
+  Log_file_location=/tmp/${component}.log
+
+  echo -e "\e[33m Downloading the resource file and script for ${component} roboshop application\e[0m" | tee -a $Log_file_location
+  curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
+  curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+
+  echo -e "\e[33m Installing ${component} server application\e[0m" | tee -a $Log_file_location
+  yum install ${component}-server -y &>> $Log_file_location
+
+  echo -e "\e[34m Enabling and restarting the ${component} application\e[0m" | tee -a $Log_file_location
+  systemctl enable ${component}-server &>> /dev/null
+  systemctl restart ${component}-server &>> $Log_file_location
+
+  echo -e "\e[32m added roboshop user and assigned permissions\e[0m" | tee -a $Log_file_location
+  rabbitmqctl add_user roboshop roboshop123
+  rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+}

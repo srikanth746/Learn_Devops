@@ -1,3 +1,3 @@
-component nodejs
+component=nodejs
 source roboshop-function.sh
 func_catalogue

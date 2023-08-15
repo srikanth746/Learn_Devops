@@ -141,3 +141,42 @@ func_user(){
   systemctl restart ${component} &>> $Log_file_location
 
 }
+
+func_cart(){
+
+  Log_file_location=/tmp/${component}.log
+  echo -e "\e[31m Copying the ${component} service to a desired location\e[0m" | tee -a $Log_file_location
+  cp cart.service /etc/systemd/system/${component}.service
+
+  echo -e "\e[33m Downloading the node js from the web page\e[0m" | tee -a $Log_file_location
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+
+  echo -e "\e[34m Installing the node JS application\e[0m" | tee -a $Log_file_location
+  yum install nodejs -y &>> $Log_file_location
+
+  echo -e "\e[33mAdding roboshop user\e[0m" | tee -a $Log_file_location
+  useradd roboshop
+
+  echo -e "\e[35m Creating a directory\e[0m" | tee -a $Log_file_location
+  mkdir /app
+
+  echo -e "\e[36m Downloading the ${component} development file\e[0m" | tee -a $Log_file_location
+  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip
+
+  cd /app
+  echo -e "\e[36m Unzipping the ${component} file\e[0m" | tee -a $Log_file_location
+  unzip /tmp/${component}.zip
+  pwd
+  echo -e "\e[36m Installing the npm\e[0m" | tee -a $Log_file_location
+  npm install &>> $Log_file_location
+
+  echo -e "\e[36m Restarting all the service present in server \e[0m" | tee -a $Log_file_location
+  systemctl daemon-reload &>> /dev/null
+
+  echo -e "\e[34m Enabling and restarting the ${component} application\e[0m" | tee -a $Log_file_location
+  systemctl enable ${component} &>> /dev/null
+  systemctl restart ${component} &>> $Log_file_location
+
+  echo -e "\e[31m Status of cart application\e[0m" | tee -a $Log_file_location
+  systemctl status ${component} ; tail -f /var/log/messages &>> $Log_file_location
+}

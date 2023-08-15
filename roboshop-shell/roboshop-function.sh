@@ -294,3 +294,35 @@ func_payment(){
   systemctl status ${component} ; tail -f /var/log/messages &>> $Log_file_location
 
 }
+
+func_dispatch(){
+  Log_file_location=/tmp/${component2}.log
+
+  echo -e "\e[31mCopying the ${component2} content\e[0m" | tee -a $Log_file_location
+  cp dispatch.service /etc/systemd/system/${component2}.service
+
+  echo -e "\e[33mInstalling the golang application\e[0m" | tee -a $Log_file_location
+  yum install ${component} -y &>> $Log_file_location
+
+  echo -e "\e[33mAdding the roboshop user\e[0m" | tee -a $Log_file_location
+  useradd roboshop
+
+  echo -e "\e[34mCreating a new directory\e[0m" | tee -a $Log_file_location
+  mkdir /app
+
+  echo -e "\e[33mDownloading the ${component2} zip file\e[0m" | tee -a $Log_file_location
+  curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip
+
+  cd /app
+  unzip /tmp/${component2}.zip
+  echo -e "\e[33mExecuting the go lang commands\e[0m" | tee -a $Log_file_location
+  go mod init dispatch
+  go get
+  go build
+
+  echo -e "\e[33mReboot the services and enabling,restarting the ${component2}\e[0m" | tee -a $Log_file_location
+  systemctl daemon-reload
+
+  systemctl enable ${component2} &>> /dev/null
+  systemctl restart ${component2} &>> $Log_file_location
+}

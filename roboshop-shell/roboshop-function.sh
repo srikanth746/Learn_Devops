@@ -259,3 +259,38 @@ func_rabbitMQ(){
   rabbitmqctl add_user roboshop roboshop123
   rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
 }
+
+func_payment(){
+  Log_file_location=/tmp/${component}.log
+  echo -e "\e[31mCopying the ${component} content service\e[0m" | tee -a $Log_file_location
+  cp payment.service /etc/systemd/system/${component}.service
+
+  echo -e "\e[32mInstalling the python3\e[0m" | tee -a $Log_file_location
+  yum install python36 gcc python3-devel -y &>> $Log_file_location
+
+  echo -e "\e[32mAdding roboshop user\e[0m" | tee -a $Log_file_location
+  useradd roboshop
+
+  echo -e "\e[32mCreating a directory\e[0m" | tee -a $Log_file_location
+  mkdir /app
+  echo -e "\e[32mDownloading the ${component} developed zip file\e[0m" | tee -a $Log_file_location
+  curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>> /dev/null
+
+  cd /app
+  echo -e "\e[32m Unzipping the ${component} file\e[0m" | tee -a $Log_file_location
+  unzip /tmp/payment.zip
+
+  echo -e "\e[32mInstalling the pip3.6 requirements\e[0m" | tee -a $Log_file_location
+  pip3.6 install -r requirements.txt &>> $Log_file_location
+
+  echo -e "\e[32mRebooting the system services\e[0m" | tee -a $Log_file_location
+  systemctl daemon-reload &>> $Log_file_location
+
+  echo -e "\e[32mEnabling and restarting the ${component} service\e[0m" | tee -a $Log_file_location
+  systemtctl enable ${component} &>> /dev/null
+  systemctl restart ${component} &>> $Log_file_location
+
+  echo -e "\e[34m Checking the status of ${component} service\e[0m" | tee -a $Log_file_location
+  systemctl status ${component} ; tail -f /var/log/messages &>> $Log_file_location
+
+}

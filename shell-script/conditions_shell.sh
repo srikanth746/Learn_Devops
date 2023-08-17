@@ -5,4 +5,5 @@ then
   echo $?
 else
   echo "Not eligible to vote"
+  echo $?
 fi

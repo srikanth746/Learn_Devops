@@ -1,6 +1,7 @@
 func_frontend(){
   Log_file_location=/tmp/roboshop-frontend.log
   if [ -z "${runtype}" ]; then
+    echo -e "\e[31m Process is exiting due to improper arguments\e[0m"
     exit
   fi
   if [ "${runtype}" == "restart" ]

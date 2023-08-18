@@ -10,8 +10,18 @@ fi
 if [ "$age" -gt 18 ]
 then
   echo "your are eligible for vote"
+  status=$?
 else
   echo "you are not eligible to vote"
+  status=$?
 fi
+
+if [ status -qe 0 ]
+then
+  echo "vote is successful"
+else
+  echo "Your vote is not valid"
+fi
+
 echo total number of input $#
 echo list of inputs $*

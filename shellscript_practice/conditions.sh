@@ -8,6 +8,3 @@ then
 else
   echo "you are not eligible to vote"
 fi
-
-echo total number of input $#
-echo list of inputs $*

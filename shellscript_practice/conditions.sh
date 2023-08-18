@@ -3,4 +3,6 @@ read age
 if [ "$age" -gt 18 ]
 then
   echo "your are eligible for vote"
+else
+  echo "you are not eligible to vote"
 fi

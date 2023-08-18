@@ -6,12 +6,14 @@ func_frontend(){
   fi
   if [ "${runtype}" == "restart" ]
   then
-      echo -e "\e[35m enabling and restarting the ${component} web server\e[0m" | tee -a $Log_file_location
+      echo -e "\e[35m Restarting the ${component} web server\e[0m" | tee -a $Log_file_location
       #systemctl enable ${component} &>> /dev/null
       systemctl restart ${component} &>> $Log_file_location
+      status=$?
 
       echo -e "\e[36m Checking the status of ${component}\e[0m" | tee -a $Log_file_location
       systemctl status ${component} ; tail -f /var/log/messages &>> $Log_file_location
+      status=$?
   else
     echo -e "\e[35mInstalling ${component} web server\e[0m" | tee -a $Log_file_location
     yum install ${component} -y &>> $Log_file_location
@@ -35,6 +37,12 @@ func_frontend(){
 
     echo -e "\e[36m Checking the status of ${component}\e[0m" | tee -a $Log_file_location
     systemctl status ${component} ; tail -f /var/log/messages &>> $Log_file_location
+  fi
+
+  if [ "$status" -eq 0 ]; then
+    echo "Success"
+  else
+    echo "Please try again"
   fi
 
 }

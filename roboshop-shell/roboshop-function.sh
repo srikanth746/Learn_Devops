@@ -167,16 +167,10 @@ func_user(){
   npm install &>> $Log_file_location
   echo -e "\e[34m Completed installation of npm\e[0m" | tee -a $Log_file_location
 
-  yum install mongodb-org-shell -y
-
-  echo -e "\e[32m Updating the schema of ${component} to mongo server\e[0m" | tee -a $Log_file_location
-  mongo --host mongo.srilearndevops.online </app/schema/${component}.js
+  func_databasesetup
 
   echo -e "\e[34m restarting all the ${component} service\e[0m" | tee -a $Log_file_location
-  systemctl daemon-reload &>> /dev/null
-  echo -e "\e[34m enabling and restarting the ${component} service\e[0m" | tee -a $Log_file_location
-  systemctl enable ${component} &>> $Log_file_location
-  systemctl restart ${component} &>> $Log_file_location
+  func_systemd
 
 }
 

@@ -1,3 +1,4 @@
 component=nodejs
+databasetype=mongodb
 source roboshop-function.sh
 func_catalogue

@@ -49,14 +49,14 @@ func_frontend(){
 
 func_mongodb(){
   Log_file_location=/tmp/mongo.log
-  echo -e "\e[32mCopying the repo file of mongo db to install for a desired location\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Copying the repo file of mongo db to install for a desired location\e[0m" | tee -a $Log_file_location
   cp mongo.repo /etc/yum.repos.d/mongo.repo
 
-  echo -e "\e[32mInstalling mongo db with updated repo\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Installing mongo db with updated repo\e[0m" | tee -a $Log_file_location
   yum install mongodb-org -y &>> $Log_file_location
 
 
-  echo -e "\e[33mlisten address from 127.0.0.1 to 0.0.0.0 in /etc/mongod.conf\e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m listen address from 127.0.0.1 to 0.0.0.0 in /etc/${component}.conf\e[0m" | tee -a $Log_file_location
   sed -i 's/127.0.0.1/0.0.0.0/' /etc/${component}.conf
 
   echo -e "\e[34mEnabling and restart of mongo DB\e[0m" | tee -a $Log_file_location
@@ -64,88 +64,103 @@ func_mongodb(){
   systemctl restart ${component} &>> $Log_file_location
 }
 
+func_systemd(){
+  echo -e "\e[33m Restarting all the service in the server\e[0m" | tee -a $Log_file_location
+    systemctl daemon-reload
+    echo -e "\e[33m Enabling and restarting the catalogue service\e[0m" | tee -a $Log_file_location
+    systemctl enable catalogue &>> $Log_file_location
+    systemctl restart catalogue &>> $Log_file_location
+}
+
+func_databasesetup(){
+  if [ -z "${databasetype}" ]; then
+    echo "Please give the database name"
+    exit
+  fi
+  if [ "${databasetype}" == "mongodb" ]; then
+    echo -e "\e[33m Installing MongoDB for the roboshop project\e[0m" | tee -a $Log_file_location
+    yum install mongodb-org-shell -y
+
+    echo -e "\e[33m Updating the catalogues schema, java script to the mongo server\e[0m" | tee -a $Log_file_location
+    mongo --host mongo.srilearndevops.online </app/schema/catalogue.js
+  fi
+
+}
 func_catalogue(){
   Log_file_location=/tmp/catalogue.log
 
-  echo -e "\e[32mCopying service and repo file to a desired location\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Copying service and repo file to a desired location\e[0m" | tee -a $Log_file_location
   cp catalogue.service /etc/systemd/system/catalogue.service
   cp mongo.repo /etc/yum.repos.d/mongo.repo
 
-  echo -e "\e[32mDownloading the nodejs from web\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Downloading the ${component} from web\e[0m" | tee -a $Log_file_location
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>> $Log_file_location
 
-  echo -e "\e[33mInstalling node JS for roboshop project\e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m Installing node JS for roboshop project\e[0m" | tee -a $Log_file_location
   yum install ${component} -y &>> $Log_file_location
 
-  echo -e "\e[33mAdding roboshop user\e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m Adding roboshop user\e[0m" | tee -a $Log_file_location
   useradd roboshop
 
-  echo -e "\e[33mInstalling MongoDB for the roboshop project\e[0m" | tee -a $Log_file_location
-  yum install mongodb-org-shell -y
+  echo -e "\e[32m Calling database setup\e[0m"
+  func_databasesetup
 
-  #Creating a directory to add the catalogue content
-
-  echo -e "\e[33mCreating the directory called app\e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m Creating the directory called app\e[0m" | tee -a $Log_file_location
   mkdir /app
   cd /app
   pwd
 
-  echo -e "\e[33mDownloading the required package from the DEV \e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m Downloading the required package from the DEV \e[0m" | tee -a $Log_file_location
   curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
   unzip /tmp/catalogue.zip
   npm install &>> $Log_file_location
 
-  echo -e "\e[33mUpdating the catalogues chema, java script to the mongo server\e[0m" | tee -a $Log_file_location
-  mongo --host mongo.srilearndevops.online </app/schema/catalogue.js
+  echo -e "\e[34m Calling system service\e[0m"
+  func_systemd
 
-  echo -e "\e[33mRestarting all the service in the server\e[0m" | tee -a $Log_file_location
-  systemctl daemon-reload
-  echo -e "\e[33mEnabling and restarting the catalogue service\e[0m" | tee -a $Log_file_location
-  systemctl enable catalogue &>> $Log_file_location
-  systemctl restart catalogue &>> $Log_file_location
 }
 
 func_redis(){
   Log_file_location=/tmp/${component}.log
 
-  echo -e "\e[34mInstalling the ${component} resource file from the official webpage\e[0m" | tee -a $Log_file_location
+  echo -e "\e[34m Installing the ${component} resource file from the official webpage\e[0m" | tee -a $Log_file_location
   yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
   yum module enable redis:remi-6.2 -y &>> $Log_file_location
   yum install ${component} -y &>> $Log_file_location
 
-  echo -e "\e[33mUpdating the listen address for the ${component} conf to 0.0.0.0\e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m Updating the listen address for the ${component} conf to 0.0.0.0\e[0m" | tee -a $Log_file_location
   sed -i 's/127.0.0.1/0.0.0.0/' /etc/redis.conf /etc/redis/redis.conf
 
-  echo -e "\e[32mEnabling and restarting the ${component} service\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Enabling and restarting the ${component} service\e[0m" | tee -a $Log_file_location
   systemctl enable ${component} &>> $Log_file_location
   systemctl restart ${component} &>> $Log_file_location
 }
 
 func_user(){
   Log_file_location=/tmp/${component}.log
-  echo -e "\e[32mCopying the ${component} service and Mongo repo file to the desired location\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Copying the ${component} service and Mongo repo file to the desired location\e[0m" | tee -a $Log_file_location
   cp user.service /etc/systemd/system/user.service
   cp mongo.repo /etc/yum.repos.d/mongo.repo
 
-  echo -e "\e[34mDownloading the node resource file\e[0m" | tee -a $Log_file_location
+  echo -e "\e[34m Downloading the node resource file\e[0m" | tee -a $Log_file_location
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
-  echo -e "\e[34mInstalling the node JS \e[0m" | tee -a $Log_file_location
+  echo -e "\e[34m Installing the node JS \e[0m" | tee -a $Log_file_location
   yum install nodejs -y &>> $Log_file_location
 
-  echo -e "\e[32mAdding roboshop user\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Adding roboshop user\e[0m" | tee -a $Log_file_location
   useradd roboshop
 
-  echo -e "\e[33mCreating a directory\e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m Creating a directory\e[0m" | tee -a $Log_file_location
   mkdir /app
 
-  echo -e "\e[33mDownloading the roboshop ${component} code from DEV team\e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m Downloading the roboshop ${component} code from DEV team\e[0m" | tee -a $Log_file_location
   curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip
 
   cd /app
 
   pwd
-  echo -e "\e[34mUnzipping the downloaded user file\e[0m" | tee -a $Log_file_location
+  echo -e "\e[34m Unzipping the downloaded user file\e[0m" | tee -a $Log_file_location
   unzip /tmp/${component}.zip
 
   echo -e "\e[33m Installing npm is started\e[0m" | tee -a $Log_file_location
@@ -154,7 +169,7 @@ func_user(){
 
   yum install mongodb-org-shell -y
 
-  echo -e "\e[32mUpdating the schema of ${component} to mongo server\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Updating the schema of ${component} to mongo server\e[0m" | tee -a $Log_file_location
   mongo --host mongo.srilearndevops.online </app/schema/${component}.js
 
   echo -e "\e[34m restarting all the ${component} service\e[0m" | tee -a $Log_file_location
@@ -177,7 +192,7 @@ func_cart(){
   echo -e "\e[34m Installing the node JS application\e[0m" | tee -a $Log_file_location
   yum install nodejs -y &>> $Log_file_location
 
-  echo -e "\e[33mAdding roboshop user\e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m Adding roboshop user\e[0m" | tee -a $Log_file_location
   useradd roboshop
 
   echo -e "\e[35m Creating a directory\e[0m" | tee -a $Log_file_location
@@ -285,31 +300,31 @@ func_rabbitMQ(){
 
 func_payment(){
   Log_file_location=/tmp/${component}.log
-  echo -e "\e[31mCopying the ${component} content service\e[0m" | tee -a $Log_file_location
+  echo -e "\e[31m Copying the ${component} content service\e[0m" | tee -a $Log_file_location
   cp payment.service /etc/systemd/system/${component}.service
 
-  echo -e "\e[32mInstalling the python3\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Installing the python3\e[0m" | tee -a $Log_file_location
   yum install python36 gcc python3-devel -y &>> $Log_file_location
 
-  echo -e "\e[32mAdding roboshop user\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Adding roboshop user\e[0m" | tee -a $Log_file_location
   useradd roboshop
 
-  echo -e "\e[32mCreating a directory\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Creating a directory\e[0m" | tee -a $Log_file_location
   mkdir /app
-  echo -e "\e[32mDownloading the ${component} developed zip file\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Downloading the ${component} developed zip file\e[0m" | tee -a $Log_file_location
   curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>> /dev/null
 
   cd /app
   echo -e "\e[32m Unzipping the ${component} file\e[0m" | tee -a $Log_file_location
   unzip /tmp/payment.zip
 
-  echo -e "\e[32mInstalling the pip3.6 requirements\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Installing the pip3.6 requirements\e[0m" | tee -a $Log_file_location
   pip3.6 install -r requirements.txt &>> $Log_file_location
 
-  echo -e "\e[32mRebooting the system services\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Rebooting the system services\e[0m" | tee -a $Log_file_location
   systemctl daemon-reload &>> $Log_file_location
 
-  echo -e "\e[32mEnabling and restarting the ${component} service\e[0m" | tee -a $Log_file_location
+  echo -e "\e[32m Enabling and restarting the ${component} service\e[0m" | tee -a $Log_file_location
   systemtctl enable ${component} &>> /dev/null
   systemctl restart ${component} &>> $Log_file_location
 
@@ -321,29 +336,29 @@ func_payment(){
 func_dispatch(){
   Log_file_location=/tmp/${component2}.log
 
-  echo -e "\e[31mCopying the ${component2} content\e[0m" | tee -a $Log_file_location
+  echo -e "\e[31m Copying the ${component2} content\e[0m" | tee -a $Log_file_location
   cp dispatch.service /etc/systemd/system/${component2}.service
 
-  echo -e "\e[33mInstalling the golang application\e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m Installing the golang application\e[0m" | tee -a $Log_file_location
   yum install ${component} -y &>> $Log_file_location
 
-  echo -e "\e[33mAdding the roboshop user\e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m Adding the roboshop user\e[0m" | tee -a $Log_file_location
   useradd roboshop
 
-  echo -e "\e[34mCreating a new directory\e[0m" | tee -a $Log_file_location
+  echo -e "\e[34m Creating a new directory\e[0m" | tee -a $Log_file_location
   mkdir /app
 
-  echo -e "\e[33mDownloading the ${component2} zip file\e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m Downloading the ${component2} zip file\e[0m" | tee -a $Log_file_location
   curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip
 
   cd /app
   unzip /tmp/${component2}.zip
-  echo -e "\e[33mExecuting the go lang commands\e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m Executing the go lang commands\e[0m" | tee -a $Log_file_location
   go mod init dispatch
   go get
   go build
 
-  echo -e "\e[33mReboot the services and enabling,restarting the ${component2}\e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m Reboot the services and enabling,restarting the ${component2}\e[0m" | tee -a $Log_file_location
   systemctl daemon-reload
 
   systemctl enable ${component2} &>> /dev/null

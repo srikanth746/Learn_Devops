@@ -34,7 +34,7 @@ func_frontend(){
     echo -e "\e[35m enabling and restarting the ${component} web server\e[0m" | tee -a $Log_file_location
     systemctl enable ${component} &>> /dev/null
     systemctl restart ${component} &>> $Log_file_location
-
+    status=$?
     echo -e "\e[36m Checking the status of ${component}\e[0m" | tee -a $Log_file_location
     systemctl status ${component} ; tail -f /var/log/messages &>> $Log_file_location
   fi

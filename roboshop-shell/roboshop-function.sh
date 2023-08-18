@@ -65,11 +65,11 @@ func_mongodb(){
 }
 
 func_systemd(){
-  echo -e "\e[33m Restarting all the service in the server\e[0m" | tee -a $Log_file_location
+  echo -e "\e[33m Restarting the ${servicename} service in the server\e[0m" | tee -a $Log_file_location
     systemctl daemon-reload
-    echo -e "\e[33m Enabling and restarting the catalogue service\e[0m" | tee -a $Log_file_location
-    systemctl enable catalogue &>> $Log_file_location
-    systemctl restart catalogue &>> $Log_file_location
+    echo -e "\e[33m Enabling and restarting the ${servicename} service\e[0m" | tee -a $Log_file_location
+    systemctl enable ${servicename} &>> $Log_file_location
+    systemctl restart ${servicename} &>> $Log_file_location
 }
 
 func_databasesetup(){
@@ -115,7 +115,7 @@ func_catalogue(){
   unzip /tmp/catalogue.zip
   npm install &>> $Log_file_location
 
-  echo -e "\e[34m Calling system service\e[0m"
+  echo -e "\e[34m Restarting ${servicename} service for Robo-shop\e[0m"
   func_systemd
 
 }

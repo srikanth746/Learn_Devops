@@ -1,4 +1,4 @@
 component=golang
-component2=dispatch
+servicename=dispatch
 source roboshop-function.sh
 func_dispatch

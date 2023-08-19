@@ -1,3 +1,3 @@
-component=payment
+servicename=payment
 source roboshop-function.sh
 func_payment

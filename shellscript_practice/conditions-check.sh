@@ -5,8 +5,8 @@ fi
 
 a=$1
 b=$2
-echo a
-echo b
+echo $a
+echo $b
 date_today=$(date)
 echo $date_today
 add=$((2+2))
@@ -18,7 +18,7 @@ function input-args() {
   echo $*
   echo $#
   echo "printed all the type of special variables"
-  return 1
+  return 0
   echo "executed the return command"
 
 }

@@ -73,18 +73,26 @@ func_frontend(){
 
 func_mongodb(){
   Log_file_location=/tmp/mongo.log
-  echo -e "\e[32m Copying the repo file of mongo db to install for a desired location\e[0m" | tee -a $Log_file_location
-  cp mongo.repo /etc/yum.repos.d/mongo.repo
+  app_status=sudo yum list installed | grep ^mongo
+  if [ -z "${app_status}" ]; then
+    echo -e "\e[34m Calling function to start service for ${component}\e[0m" | tee -a $Log_file_location
+    func_systemservice
+    func_exitstatus
+  else
+    echo -e "\e[32m Copying the repo file of mongo db to install for a desired location\e[0m" | tee -a $Log_file_location
+    cp mongo.repo /etc/yum.repos.d/mongo.repo
+    func_exitstatus
+    echo -e "\e[32m Installing mongo db with updated repo\e[0m" | tee -a $Log_file_location
+    yum install mongodb-org -y &>> $Log_file_location
+    func_exitstatus
 
-  echo -e "\e[32m Installing mongo db with updated repo\e[0m" | tee -a $Log_file_location
-  yum install mongodb-org -y &>> $Log_file_location
-
-
-  echo -e "\e[33m listen address from 127.0.0.1 to 0.0.0.0 in /etc/${component}.conf\e[0m" | tee -a $Log_file_location
-  sed -i 's/127.0.0.1/0.0.0.0/' /etc/${component}.conf
-
-  echo -e "\e[34m Calling function to start service for ${component}\e[0m" | tee -a $Log_file_location
-  func_systemservice
+    echo -e "\e[33m listen address from 127.0.0.1 to 0.0.0.0 in /etc/${component}.conf\e[0m" | tee -a $Log_file_location
+    sed -i 's/127.0.0.1/0.0.0.0/' /etc/${component}.conf
+    func_exitstatus
+    echo -e "\e[34m Calling function to start service for ${component}\e[0m" | tee -a $Log_file_location
+    func_systemservice
+    func_exitstatus
+  fi
 
 }
 

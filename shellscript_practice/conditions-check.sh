@@ -7,10 +7,12 @@ a=$1
 b=$2
 echo $a
 echo $b
+echo "working on substitution variables"
 date_today=$(date)
 echo $date_today
+echo "working on manipulation variables"
 add=$((2+2))
-echo addition$add
+echo addition $add
 function input-args() {
   echo "working on the function part to pass arguments from the main"
   q=$1

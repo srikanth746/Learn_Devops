@@ -1,2 +1,3 @@
+servicename=shipping
 source roboshop-function.sh
 func_shipping

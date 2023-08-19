@@ -18,7 +18,7 @@ function input-args() {
   echo $*
   echo $#
   echo "printed all the type of special variables"
-  return 0
+  exit 1
   echo "executed the return command"
 
 }

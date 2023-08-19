@@ -20,7 +20,7 @@ func_systemservice(){
 func_databasesetup(){
   if [ -z "${databasetype}" ]; then
     echo "Please give the database name"
-    exit
+    exit 1
   fi
   if [ "${databasetype}" == "mongodb" ]; then
     echo -e "\e[33m Installing MongoDB for the roboshop project\e[0m" | tee -a $Log_file_location
@@ -30,6 +30,14 @@ func_databasesetup(){
     mongo --host mongo.srilearndevops.online </app/schema/catalogue.js
   fi
 
+}
+
+func_exitstatus(){
+  if [ $? -eq 0 ]; then
+    echo -e "\e[34mSUCCESS\e[0m"
+  else
+    echo -e "\e[31mFAILURE\e[0m"
+  fi
 }
 
 func_frontend(){
@@ -42,20 +50,20 @@ func_frontend(){
   else
     echo -e "\e[35m Installing ${component} web server\e[0m" | tee -a $Log_file_location
     yum install ${component} -y &>> $Log_file_location
-
+    func_exitstatus
     echo -e "\e[34m Copying the roboshop frontend conf to a desired location" | tee -a $Log_file_location
     cp roboshop.conf /etc/nginx/default.d/roboshop.conf
-
+    func_exitstatus
     echo -e "\e[31m Removing the default web server html\e[0m" | tee -a $Log_file_location
     rm -rf /usr/share/nginx/html/*
-
+    func_exitstatus
     echo -e "\e[34m Downloading the required roboshop content provided by DEV\e[0m" | tee -a $Log_file_location
     curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
-
+    func_exitstatus
     echo -e "\e[34m Changing the dir to unzip the downloaded roboshop content\e[0m" | tee -a $Log_file_location
     cd /usr/share/nginx/html
     unzip /tmp/frontend.zip &>> /dev/null
-
+    func_exitstatus
     echo -e "\e[35m Calling system defined function to start the ${component} service \e[0m" | tee -a $Log_file_location
     func_systemservice
 

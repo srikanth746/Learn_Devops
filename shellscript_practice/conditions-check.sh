@@ -20,9 +20,10 @@ function input-args() {
   echo $*
   echo $#
   echo "printed all the type of special variables"
+  return 10
   echo "executed the return command"
 
 }
 
 input-args 123 "abv"
-echo $?
+echo Function returned - $?

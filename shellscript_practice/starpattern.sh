@@ -1,5 +1,5 @@
 #!/bin/bash
-function sqaure-pattern(){
+function square-pattern(){
   echo "Printing the square star pattern"
   n=$1
   for((i=1;i<=n;i++))

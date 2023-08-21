@@ -10,4 +10,4 @@ function square-pattern(){
     }
   }
 }
-square_pattern 5
+square-pattern 5

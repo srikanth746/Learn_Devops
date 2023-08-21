@@ -27,3 +27,5 @@ function input-args() {
 
 input-args 123 "abv"
 echo Function returned - $?
+
+echo Env. variables $bnc

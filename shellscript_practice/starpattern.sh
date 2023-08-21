@@ -4,7 +4,7 @@ function square-pattern(){
   n=$1
   for((i=1;i<=n;i++))
   {
-    for((j=i;j<=n;j++))
+    for((j=0;j<=i;j++))
     {
       echo "*"
     }

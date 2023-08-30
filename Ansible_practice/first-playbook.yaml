@@ -1,6 +1,6 @@
 ---
 - name: Install and start of nginx playbook
-  hosts: WE
+  hosts: WEB
   become: true
 
   tasks:

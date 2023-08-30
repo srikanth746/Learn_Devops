@@ -1,6 +1,6 @@
 ---
 - name: Install and start of nginx playbook
-  hosts: WEB
+  hosts: WE
   become: true
 
   tasks:
@@ -14,5 +14,14 @@
         name: nginx
         state: started
 
+- name: Install and setup mongo DB
+  hosts: Mongo
+  become: true
+
+  tasks:
+    - name: Installing of Mongo DB server
+      yum:
+        name : mongod
+        state: present
 
 

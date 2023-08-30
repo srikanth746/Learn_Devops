@@ -21,7 +21,7 @@
   tasks:
     - name: Installing of Mongo DB server
       yum:
-        name : mongod
+        name : mongodb
         state: present
 
 

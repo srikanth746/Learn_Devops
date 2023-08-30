@@ -1,11 +1,17 @@
 ---
-- name: Install nginx
+- name: Install and start of nginx playbook
   hosts: WEB
   become: true
 
   tasks:
     - name: Installation of nginx
-      shell: yum install nginx
+      yum:
+        - name: nginx
+          state: present
+    - name: Starting the nginx service
+      service:
+        - name: nginx
+          state: started
 
 
 

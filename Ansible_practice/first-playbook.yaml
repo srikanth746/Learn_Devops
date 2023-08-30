@@ -1,13 +1,11 @@
 ---
-- name: Install and Start nginx
+- name: Install nginx
   hosts: WEB
   become: true
 
   tasks:
-    name: Installation of Nginx
-    yum:
-      name: nginx
-      state: present
+    - name: Installation of nginx
+      shell: yum install nginx
 
 
 

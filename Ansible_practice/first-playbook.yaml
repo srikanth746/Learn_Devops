@@ -5,7 +5,9 @@
 
   tasks:
     - name: Installation of nginx server
-      shell: yum install nginx -y
+      yum:
+        name : nginx
+        state : present
 
     - name: Service nginx
       service:

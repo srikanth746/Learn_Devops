@@ -4,14 +4,13 @@
   become: true
 
   tasks:
-    - name: Installation of nginx
-      yum:
-        - name: nginx
-          state: present
-    - name: Starting the nginx service
+    - name: Installation of nginx server
+      shell: yum install nginx
+
+    - name: Service nginx
       service:
-        - name: nginx
-          state: started
+        name: nginx
+        state: started
 
 
 

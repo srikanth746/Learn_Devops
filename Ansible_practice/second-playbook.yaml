@@ -10,5 +10,5 @@
       shell : mkdir demo1
     - name : copying the file to the dir
       copy :
-        src: /home/centos/sample-file.txt
+        src: /home/centos/*
         dest: /home/centos/demo1/

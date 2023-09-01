@@ -1,0 +1,8 @@
+---
+- name : Working on second playbook of ansible.
+  hosts : all
+  become : true
+
+  tasks:
+    - name : File creation using shell
+      shell : touch sample-file.txt

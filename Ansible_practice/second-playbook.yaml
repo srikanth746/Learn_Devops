@@ -6,3 +6,9 @@
   tasks:
     - name : File creation using shell
       shell : touch sample-file.txt
+    - name : creating a directory
+      shell : mkdir demo1
+    - name : copying the file to the dir
+      copy :
+        src: /home/centos/sample-file.txt
+        dest: /home/centos/demo1/

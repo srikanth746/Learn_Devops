@@ -1,0 +1,14 @@
+---
+name : Installing apache server on the node Instance
+hosts : all
+become: true
+
+tasks:
+  - name : Installing apache server
+    apt:
+      name : httpd
+      state : present
+
+    notify:
+      name : httpd
+      state : started

@@ -1,15 +1,15 @@
 ---
-name : Installing apache server on the node Instance
-hosts : all
-become: true
+- name : Install httpd apache server
+  hosts : all
+  become : true
 
-tasks:
-  - name : Installing apache server
-    apt:
-      name : apache2
-      state : present
+  tasks:
 
-  - name : Restarting the apache server
-    notify:
-      name : apache2
-      state : started
+    - name : Installing apache-2 servers
+    - yum :
+        name : httpd
+        state : present
+    - name : Starting the apache-2 server
+    - notify :
+        name : httpd
+        state : started

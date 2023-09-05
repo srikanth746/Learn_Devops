@@ -9,6 +9,7 @@ tasks:
       name : apache2
       state : present
 
+  - name : Restarting the apache server
     notify:
       name : apache2
       state : started

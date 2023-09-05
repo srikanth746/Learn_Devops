@@ -1,15 +1,10 @@
 ---
 - name : Install httpd apache server
-  hosts : all
+  hosts : Apache
   become : true
 
   tasks:
-
-    - name : Installing apache-2 servers
-    - yum :
-        name : httpd
-        state : present
-    - name : Starting the apache-2 server
-    - notify :
-        name : httpd
-        state : started
+    name : apache installation
+    yum :
+      name : httpd
+      state : present

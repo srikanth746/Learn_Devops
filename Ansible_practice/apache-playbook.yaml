@@ -1,10 +1,10 @@
 ---
-- name : Install httpd apache server
-  hosts : Apache
-  become : true
+- name: Install apache server
+  hosts: Apache
+  become: true
 
   tasks:
-    name : apache installation
-    yum :
-      name : httpd
-      state : present
+    name: apache installation
+    yum:
+      name: httpd
+      state: present

@@ -1,10 +1,10 @@
 ---
- name : Installation of apache2
- hosts : all
- become: true
+- name: Install and start of nginx playbook
+  hosts: WEB
+  become: true
 
- tasks :
-   name : Install apache on target node
-   yum :
-     name : apache2
-     state : present
+  tasks :
+    name: Install apache
+    yum:
+      name: httpd
+      state: present

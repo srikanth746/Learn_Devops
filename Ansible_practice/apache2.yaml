@@ -5,4 +5,4 @@
    - name: Apache2 server installation
      ansible.builtin.yum:
       name: apache2
-      state: Installed
+      state: installed

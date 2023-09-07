@@ -1,27 +1,12 @@
 ---
-- name: Install and start of nginx playbook
-  hosts: WEB
+- name: working on playbook to create vars and debug
+  hosts: all
   become: true
-
+  vars:
+    sample1=Hello-world
+    g20=welcome to g20 summit INDIA
   tasks:
-    - name: Installation of nginx server
-      yum:
-        name : nginx
-        state : present
-
-    - name: Service nginx
-      service:
-        name: nginx
-        state: started
-
-- name: Install and setup mongo DB
-  hosts: Mongo
-  become: true
-
-  tasks:
-    - name: Installing of Mongo DB server
-      yum:
-        name : mongo
-        state: present
-
+    - name: working on debug and variables of ansible
+      ansible.builtin.debug:
+        msg: {{ sample1,g20  }}
 

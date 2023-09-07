@@ -1,0 +1,6 @@
+- name: Play book to perform ssh authentication
+  hosts: all
+  become: true
+  tasks:
+    - name: ssh for the new nodes connection
+      ansible.builtin.shell: ssh-keygen

@@ -1,0 +1,8 @@
+- name: Installation of apache
+  hosts: all
+  become: true
+  tasks:
+   - name: Apache2 server installation
+     ansible.builtin.yum:
+      name: apache2
+      state: Installed

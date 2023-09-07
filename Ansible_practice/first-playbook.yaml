@@ -3,8 +3,8 @@
   hosts: all
   become: true
   vars:
-    sample1=Hello-world
-    g20=welcome to g20 summit INDIA
+   sample1=Hello-world
+   g20=welcome to g20 summit INDIA
   tasks:
     - name: working on debug and variables of ansible
       ansible.builtin.debug:

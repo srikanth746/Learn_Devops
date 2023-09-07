@@ -6,3 +6,8 @@
      ansible.builtin.yum:
       name: python3
       state: installed
+- name: Installation of Nginx
+  hosts: WEB
+  become: true
+  roles:
+    - first-role

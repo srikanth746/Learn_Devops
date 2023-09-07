@@ -8,5 +8,5 @@
   tasks:
     - name: working on debug and variables of ansible
       ansible.builtin.debug:
-        msg: {{ sample1,g20  }}
+        msg: "{{ sample1,g20  }}"
 

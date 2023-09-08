@@ -20,10 +20,6 @@
         src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
         dest: /usr/share/nginx/html
         remote_src: yes
-    - name: changing the directory and unzipping the frontend
-      ansible.builtin.shell:
-        chdir: /usr/share/nginx/html
-        cmd: unzip /tmp/frontend.zip &>> /dev/null
     - name: Restarting of nginx web service
       ansible.builtin.service:
         name: nginx

@@ -9,7 +9,7 @@
         state: latest
     - name: Copying of roboshop conf to default nginx.conf
       ansible.builtin.copy:
-        src: roboshop.conf
+        src: /config/roboshop.conf
         dest: /etc/nginx/default.d/roboshop.conf
       ansible.builtin.shell: rm -rf /usr/share/nginx/html/*
     - name: Downloading of frontend zip file

@@ -18,7 +18,6 @@
     - name: Downloading web frontend zip file
       ansible.builtin.file:
         path: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
-        dest: /tmp/frontend.zip
         state: present
     - name: changing the directory and unzipping the frontend
       ansible.builtin.shell:

@@ -18,7 +18,7 @@
     - name: Downloading web frontend zip file
       ansible.builtin.file:
         path: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
-        state: present
+        state: hard
     - name: changing the directory and unzipping the frontend
       ansible.builtin.shell:
         chdir: /usr/share/nginx/html

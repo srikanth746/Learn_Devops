@@ -9,4 +9,8 @@
     - name: working on debug and variables of ansible
       ansible.builtin.debug:
         msg: "{{ sample1,g20  }}"
+    - name: Installation of nginx
+      ansible.builtin.yum:
+        name: nginx
+        state: present
 

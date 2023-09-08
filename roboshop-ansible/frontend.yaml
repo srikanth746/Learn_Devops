@@ -18,6 +18,7 @@
     - name: Downloading web frontend zip file
       ansible.builtin.unarchive:
         src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+        path: /tmp/frontend.zip
         dest: /tmp/frontend.zip
         remote_src: yes
     - name: changing the directory and unzipping the frontend

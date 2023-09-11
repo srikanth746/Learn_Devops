@@ -1,0 +1,24 @@
+- name: Installation of Mongo DB services
+  hosts: WEB
+  become: true
+
+  tasks:
+    - name: Copying the mongo db repo file
+      ansible.builtin.copy:
+        src: /config/mongod.repo
+        dest: /etc/yum.repos.d/mongo.repo
+    - name: Installation of Mongo DB application
+      ansible.builtin.yum:
+        name: mongodb-org
+        state: installed
+    - name: Replacing the Listen Address of MongoDB
+      ansible.builtin.replace:
+        path: /etc/mongod.conf
+        regex: 127.0.0.1
+        replace: 0.0.0.0
+    - name: Restarting of mongo DB service
+      ansible.builtin.daemon-reload:
+        name: mongodb-org
+        enabled: yes
+        state: started
+

@@ -18,6 +18,6 @@
         replace: 0.0.0.0
     - name: Mongo-DB service start
       ansible.builtin.service:
-        name: mongodb
+        name: mongod
         state: started
 

@@ -14,7 +14,7 @@
     - name: Replacing the Listen Address of MongoDB
       ansible.builtin.replace:
         path: /etc/mongod.conf
-        regex: 127.0.0.1
+        regexp: 127.0.0.1
         replace: 0.0.0.0
     - name: Mongo-DB service start
       ansible.builtin.service:

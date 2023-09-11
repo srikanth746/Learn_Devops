@@ -16,9 +16,8 @@
         path: /etc/mongod.conf
         regex: 127.0.0.1
         replace: 0.0.0.0
-    - name: Restarting of mongo DB service
-      ansible.builtin.daemon-reload:
-        name: mongodb-org
-        enabled: yes
+    - name: Mongo-DB service start
+      ansible.builtin.service:
+        name: mongodb
         state: started
 

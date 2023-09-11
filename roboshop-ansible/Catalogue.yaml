@@ -1,0 +1,49 @@
+- name: Setup of Catalogue service for roboshop
+  hosts: Catalogue
+  become: true
+  tasks:
+    - name: Setting Node JS repo
+      ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+    - name: Installation of Node JS
+      ansible.builtin.yum:
+        name: nodejs
+        state: present
+    - name: Adding roboshop user
+      ansible.builtin.user:
+        name: roboshop
+    - name: Creating app dir
+      ansible.builtin.shell:
+        cmd: mkdir /app
+    - name: Unzipping the catalogue file provided by dev team
+      ansible.builtin.unarchive:
+        src: https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
+        dest: /tmp/catalogue.zip
+        remote_src: yes
+    - name: Changing the dir and working on npm install
+      ansible.builtin.shell:
+        chdir: /app
+        cmd: npm install
+    - name: Copying the data of catalogue service to systemd service file
+      ansible.builtin.copy:
+        src: service/catalogue.service
+        dest: /etc/systemd/system/catalogue.service
+    - name: Restarting the system service for the catalogue
+      ansible.builtin.service:
+        name: catalogue
+        enabled: yes
+        state: started
+    - name: Setting up the mongo db schema
+      ansible.builtin.yum:
+        name: mongodb-org-shell
+        state: installed
+    - name: Setting up the mongo db schema
+      ansible.builtin.yum:
+        name: mongodb-org-shell
+        state: installed
+    - name: Loading the Schema for the mongo DB host
+      ansible.builtin.shell:
+        cmd: mongo --host mongo.srilearndevops.online </app/schema/catalogue.js
+
+
+
+

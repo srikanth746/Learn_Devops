@@ -32,7 +32,11 @@
         name: catalogue
         enabled: yes
         state: started
-    - name: Setting up the mongo db schema
+    - name: Copying the mongo db repo file
+      ansible.builtin.copy:
+        src: config/mongod.repo
+        dest: /etc/yum.repos.d/mongo.repo
+    - name: Setting up the mongo-db schema
       ansible.builtin.yum:
         name: mongodb-org-shell
         state: installed

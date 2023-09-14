@@ -13,7 +13,7 @@
         name: roboshop
     - name: Creating app dir
       ansible.builtin.shell:
-        cmd: mkdir /app
+        cmd: mkdir app
     - name: Unzipping the catalogue file provided by dev team
       ansible.builtin.unarchive:
         src: https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip

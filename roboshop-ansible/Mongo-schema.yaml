@@ -1,14 +1,26 @@
-- name: Installation of Mongo DB services
-  hosts: MONGODB
+- name: Install Mongo DB schema
+  hosts: CATALOGUE
   become: true
-
   tasks:
-    - name: Copying the mongo db repo file
+    - name: Copy mongo db repo
       ansible.builtin.copy:
         src: config/mongod.repo
         dest: /etc/yum.repos.d/mongo.repo
-    - name: Installation of mongo db
+    - name: Installation of mongo-db shell
       ansible.builtin.yum:
         name: mongodb-org-shell
         state: installed
+#- name: Installation of Mongo DB services
+#  hosts: MONGODB
+#  become: true
+#
+#  tasks:
+#    - name: Copying the mongo db repo file
+#      ansible.builtin.copy:
+#        src: config/mongod.repo
+#        dest: /etc/yum.repos.d/mongo.repo
+#    - name: Installation of mongo db
+#      ansible.builtin.yum:
+#        name: mongodb-org-shell
+#        state: installed
 

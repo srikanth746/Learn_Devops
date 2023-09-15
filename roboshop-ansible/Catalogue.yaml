@@ -33,8 +33,13 @@
         enabled: yes
         state: started
     - name: Setting up the mongo-db schema
-      ansible.builtin.import_tasks:
-        file: Mongo-schema.yaml
+      ansible.builtin.copy:
+        src: config/mongod.repo
+        dest: /etc/yum.repos.d/mongo.repo
+    - name: Installation of Mongo DB application
+      ansible.builtin.yum:
+        name: mongodb-org-shell
+        state: installed
     - name: Loading the Schema for the mongo DB host
       ansible.builtin.shell:
         cmd: mongo --host mongo.srilearndevops.online </app/schema/catalogue.js

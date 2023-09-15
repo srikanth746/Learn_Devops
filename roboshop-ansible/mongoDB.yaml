@@ -1,5 +1,5 @@
 - name: Installation of Mongo DB services
-  hosts: Mongo
+  hosts: MONGODB
   become: true
 
   tasks:

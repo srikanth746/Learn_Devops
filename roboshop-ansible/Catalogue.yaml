@@ -17,11 +17,11 @@
     - name: Unzipping the catalogue file provided by dev team
       ansible.builtin.unarchive:
         src: https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
-        dest: /app
+        dest: app
         remote_src: yes
     - name: Changing the dir and working on npm install
       ansible.builtin.shell:
-        chdir: /app
+        chdir: app
         cmd: npm install
     - name: Copying the data of catalogue service to systemd service file
       ansible.builtin.copy:

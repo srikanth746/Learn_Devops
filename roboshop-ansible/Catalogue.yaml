@@ -1,5 +1,5 @@
 - name: Setup of Catalogue service for roboshop
-  hosts: Catalogue
+  hosts: CATALOGUE
   become: true
   tasks:
     - name: Setting Node JS repo
@@ -32,14 +32,9 @@
         name: catalogue
         enabled: yes
         state: started
-    - name: Copying the mongo db repo file
-      ansible.builtin.copy:
-        src: config/mongod.repo
-        dest: /etc/yum.repos.d/mongo.repo
     - name: Setting up the mongo-db schema
-      ansible.builtin.yum:
-        name: mongodb-org-shell
-        state: installed
+      ansible.builtin.import_tasks:
+        file: Mongo-schema.yaml
     - name: Loading the Schema for the mongo DB host
       ansible.builtin.shell:
         cmd: mongo --host mongo.srilearndevops.online </app/schema/catalogue.js

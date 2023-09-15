@@ -1,0 +1,12 @@
+- name: Setup Mongo DB schema
+  hosts: all
+  become: true
+  tasks:
+    - name: Copy of mongo repo file
+      ansible.builtin.copy:
+        src: config/mongod.repo
+        dest: /etc/yum.repos.d/mongo.repo
+    - name: Setting up the mongo-db schema
+      ansible.builtin.yum:
+        name: mongodb-org-shell
+        state: installed

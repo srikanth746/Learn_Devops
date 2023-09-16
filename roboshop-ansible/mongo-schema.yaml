@@ -1,0 +1,16 @@
+- name: Setting mongo database schema
+  hosts: all
+  become: true
+  tasks:
+    - name: Copying Mongo repo file
+      ansible.builtin.copy:
+        src: config/mongod.repo
+        dest: /etc/yum.repos.d/mongo.repo
+
+    - name: Installing of mongo application
+      ansible.builtin.yum:
+        name: mongo-org-shell
+        state: installed
+
+    - name: Loading the schema for mongo database
+      ansible.builtin.shell: mongo --host mongo.srilearndevops.online </app/schema/catalogue.js

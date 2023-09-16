@@ -1,5 +1,5 @@
 - name: Setup of mongo database schema
-  hosts: MONGODB
+  hosts: CATALOGUE
   become: true
 
   tasks:

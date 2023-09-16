@@ -41,10 +41,11 @@
         dest: /etc/systemd/system/catalogue.service
 
     - name: Restarting the system service for the catalogue
-      ansible.builtin.service:
+      ansible.builtin.systemd:
         name: catalogue
         enabled: yes
         state: started
+        daemon-reload: true
 
     - name: Setting up the mongo-db schema
       ansible.builtin.import_tasks:

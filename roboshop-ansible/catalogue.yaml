@@ -1,4 +1,4 @@
-- name: Setup of Catalogue service for roboshop
+- name: Catalogue service for roboshop
   hosts: CATALOGUE
   become: true
   tasks:

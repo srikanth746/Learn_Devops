@@ -1,0 +1,15 @@
+- name: Play book to start catalogue service
+  hosts: CATALOGUE
+  become: true
+  tasks:
+    - name: Copying the service file to desired location
+      ansible.builtin.copy:
+        src: service/catalogue.service
+        dest: /etc/systemd/system/catalogue.service
+
+    - name: Restarting the catalogue services
+      ansible.builtin.systemd:
+        name: catalogue
+        enabled: yes
+        state: started
+        daemon_reload: true

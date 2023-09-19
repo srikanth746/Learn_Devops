@@ -1,6 +1,6 @@
 - name: Download the zip file send by developer
   ansible.builtin.unarchive:
-    src: https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
+    src: https://roboshop-artifacts.s3.amazonaws.com/"{{ component }}".zip
     dest: /app
     remote_src: yes
 

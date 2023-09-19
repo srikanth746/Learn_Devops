@@ -9,3 +9,9 @@
 
     - name: setting up the application pre-requirements
       ansible.builtin.import_tasks: appreq.yaml
+
+    - name: setting database schema of roboshop project
+      ansible.builtin.import_tasks: mongo-schema.yaml
+
+    - name: Restarting the User application
+      ansible.builtin.import_tasks: user_system.yaml

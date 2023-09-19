@@ -1,8 +1,18 @@
 - name: Redis Roboshop playbook
   hosts: REDIS
   become: true
+  vars:
+    component = redis
   tasks:
     - name: Install Redis for roboshop
       ansible.builtin.yum:
         name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
         state: present
+
+    - name: Enable redis module for roboshop
+      ansible.builtin.shell: yum module enable redis:remi-6.2 -y
+
+    - name: Installation of redis
+      ansible.builtin.yum:
+        name: {{ component }}
+        state: installed

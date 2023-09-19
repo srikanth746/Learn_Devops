@@ -6,6 +6,6 @@
 - name: Restarting the catalogue services
   ansible.builtin.systemd:
     name: catalogue
+    state: restarted
     enabled: yes
-    state: started
     daemon_reload: true

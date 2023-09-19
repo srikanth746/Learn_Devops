@@ -16,3 +16,15 @@
       ansible.builtin.yum:
         name: {{ component }}
         state: installed
+
+    - name: Replace the IP conf for redis
+      ansible.builtin.replace:
+        path: /etc/redis/redis.conf
+        regexp: 127.0.0.1
+        replace: 0.0.0.0
+
+    - name: Replace the IP conf for redis
+      ansible.builtin.systemd:
+        name: {{ component }}
+        enabled: yes
+        state: restarted

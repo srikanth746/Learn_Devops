@@ -1,6 +1,8 @@
 - name: playbook for the catalogue robo shop application
   hosts: CATALOGUE
   become: true
+  vars:
+    component: catalogue
   tasks:
     - name: setting node JS function
       ansible.builtin.import_tasks: nodejs-setup.yaml

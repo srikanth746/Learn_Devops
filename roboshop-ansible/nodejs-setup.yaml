@@ -1,31 +1,27 @@
-- name: Node JS installation
-  hosts: CATALOGUE
-  become: true
-  tasks:
-    - name: Downloading the node JS file
-      ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+- name: Downloading the node JS file
+  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
-    - name: Installation of the Node JS Application
-      ansible.builtin.yum:
-        name: nodejs
-        state: installed
+- name: Installation of the Node JS Application
+  ansible.builtin.yum:
+    name: nodejs
+    state: installed
 
-    - name: Cleaning old app dir
-      ansible.builtin.file:
-        path: /app
-        state: absent
+- name: Cleaning old app dir
+  ansible.builtin.file:
+    path: /app
+    state: absent
 
-    - name: Creating app dir
-      ansible.builtin.file:
-        path: /app
-        state: directory
+- name: Creating app dir
+  ansible.builtin.file:
+    path: /app
+    state: directory
 
-    - name: Changing the directory
-      ansible.builtin.shell:
-        args:
-          chdir: app/
+- name: Changing the directory
+  ansible.builtin.shell:
+    args:
+      chdir: app/
 
-    - name: Installation of npm
-      ansible.builtin.yum:
-        name: npm
-        state: installed
+- name: Installation of npm
+  ansible.builtin.yum:
+    name: npm
+    state: installed

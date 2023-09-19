@@ -16,8 +16,6 @@
     path: /app
     state: directory
 
-- name: changing the app directory
-  ansible.builtin.shell: cd /app
-
-- name: Installation of npm
-  ansible.builtin.shell: npm install
+- name: Adding robo-shop user
+  ansible.builtin.user:
+    name: roboshop

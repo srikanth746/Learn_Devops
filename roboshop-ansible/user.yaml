@@ -8,7 +8,7 @@
       ansible.builtin.import_tasks: nodejs-setup.yaml
 
     - name: setting up the application pre-requirements
-      ansible.builtin.import_tasks: appreq.yaml
+      ansible.builtin.import_tasks: appreq_user.yaml
 
     - name: setting database schema of roboshop project
       ansible.builtin.import_tasks: mongo-schema.yaml

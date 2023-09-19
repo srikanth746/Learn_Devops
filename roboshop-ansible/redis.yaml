@@ -15,15 +15,15 @@
     - name: Installation of redis
       ansible.builtin.yum:
         name: "{{ component }}"
-        state: installed
+        state: started
 
-    - name: Replace the IP conf for redis
+    - name: Updated the listen address
       ansible.builtin.replace:
         path: /etc/redis/redis.conf
         regexp: 127.0.0.1
         replace: 0.0.0.0
 
-    - name: Replace the IP conf for redis
+    - name: Restarting the redis configuration
       ansible.builtin.systemd:
         name: "{{ component }}"
         enabled: yes

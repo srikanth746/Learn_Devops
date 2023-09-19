@@ -5,18 +5,11 @@
     - name: setting node JS function
       ansible.builtin.import_tasks: nodejs-setup.yaml
 
-    - name: Adding robo-shop user
-      ansible.builtin.user:
-        name: roboshop
-
     - name: setting database schema of roboshop project
       ansible.builtin.import_tasks: mongo-schema.yaml
 
-    - name: Downloading catalogue zip file and extracting the content
-      ansible.builtin.unarchive:
-        src: https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
-        dest: /app
-        remote_src: yes
+    - name: setting up the application pre-requirements
+      ansible.builtin.import_tasks: appreq.yaml
 
     - name: Setup of catalogue robo-shop application
       ansible.builtin.import_tasks: catalogue_system.yaml

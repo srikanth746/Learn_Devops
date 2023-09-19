@@ -8,6 +8,7 @@
       ansible.builtin.yum:
         name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
         state: installed
+        disable_gpg_check: true
 
     - name: Enable redis module for roboshop
       ansible.builtin.shell: yum module enable redis:remi-6.2 -y
@@ -15,7 +16,7 @@
     - name: Installation of redis
       ansible.builtin.yum:
         name: "{{ component }}"
-        state: started
+        state: installed
 
     - name: Updated the listen address
       ansible.builtin.replace:

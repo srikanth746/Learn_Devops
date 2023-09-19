@@ -17,11 +17,6 @@
     state: directory
 
 - name: Changing the directory
-  ansible.builtin.shell:
-    args:
-      chdir: app/
-
-- name: Installation of npm
-  ansible.builtin.yum:
-    name: npm
-    state: installed
+  ansible.builtin.shell: npm install
+  args:
+    chdir: /app

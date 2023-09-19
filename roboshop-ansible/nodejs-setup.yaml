@@ -16,7 +16,8 @@
     path: /app
     state: directory
 
-- name: Changing the directory
+- name: changing the app directory
+  ansible.builtin.shell: cd /app
+
+- name: Installation of npm
   ansible.builtin.shell: npm install
-  args:
-    chdir: /app

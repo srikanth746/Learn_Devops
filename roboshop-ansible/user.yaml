@@ -1,0 +1,11 @@
+- name: User application playbook
+  hosts: USER
+  become: true
+  vars:
+    component: user
+  tasks:
+    - name: Node JS setup
+      ansible.builtin.import_tasks: nodejs-setup.yaml
+
+    - name: setting up the application pre-requirements
+      ansible.builtin.import_tasks: appreq.yaml

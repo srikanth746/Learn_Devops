@@ -2,7 +2,7 @@
   hosts: REDIS
   become: true
   vars:
-    component = redis
+    component: redis
   tasks:
     - name: Install Redis for roboshop
       ansible.builtin.yum:

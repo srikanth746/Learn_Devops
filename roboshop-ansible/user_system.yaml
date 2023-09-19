@@ -1,0 +1,11 @@
+- name: Copying the systemd service file
+  ansible.builtin.copy:
+    src: service/user.service
+    dest: /etc/systemd/system/user.service
+
+- name: Restarting the user services
+  ansible.builtin.systemd:
+    name: user
+    state: restarted
+    enabled: yes
+    daemon_reload: true

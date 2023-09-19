@@ -1,0 +1,11 @@
+- name: Download the zip file send by developer
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
+    dest: /app
+    remote_src: yes
+
+- name: Change the directory and install the node JS dependices
+  ansible.builtin.shell: npm install
+  args:
+    chdir: /app
+

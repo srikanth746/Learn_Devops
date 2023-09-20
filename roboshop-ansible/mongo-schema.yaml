@@ -7,5 +7,5 @@
     name: mongodb-org-shell
     state: installed
 - name: Loading the schema for the mongo database
-  ansible.builtin.shell: mongo --host mongo.srilearndevops.online </app/schema/catalogue.js
+  ansible.builtin.shell: mongo --host mongo.srilearndevops.online </app/schema/"{{ component }}".js
 

@@ -1,0 +1,11 @@
+- name: Copying the systemd service file
+  ansible.builtin.copy:
+    src: service/cart.service
+    dest: /etc/systemd/system/cart.service
+
+- name: Restarting the cart services
+  ansible.builtin.systemd:
+    name: cart
+    state: restarted
+    enabled: yes
+    daemon_reload: true

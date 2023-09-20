@@ -10,8 +10,5 @@
     - name: setting up the application pre-requirements
       ansible.builtin.import_tasks: appreq_cart.yaml
 
-    - name: setting database schema of roboshop project
-      ansible.builtin.import_tasks: mongo-schema.yaml
-
     - name: Restarting the User application
       ansible.builtin.import_tasks: cart_system.yaml

@@ -1,0 +1,11 @@
+- name: Working on the conditions in ansible playbook
+  hosts: all
+  become: true
+  tasks:
+    - name: print the fruit name
+      ansible.builtin.debug:
+        msg: fruit name - mango
+
+    - name: print the fruit name
+      ansible.builtin.debug:
+        msg: fruit name - banana

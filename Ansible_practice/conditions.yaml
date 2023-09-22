@@ -28,3 +28,8 @@
       ansible.builtin.shell:
         cmd: yum install python -y
       ignore_errors: yes
+
+    - name: Variable is defined
+      ansible.builtin.debug:
+        msg: fruit name - mango
+        when: fruit1 is defined

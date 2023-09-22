@@ -4,7 +4,7 @@
   tasks:
     - name: Copy of MY-SQL repo
       ansible.builtin.copy:
-        src: config/MYSQL.repo
+        src: /config/MYSQL.repo
         dest: /etc/yum.repos.d/mysql.repo
 
     - name: Disabling of MYSQL

@@ -14,3 +14,12 @@
       ansible.builtin.debug:
         msg: fruit name - bottle-guard
       when: fruit2 == "carrot"
+
+    - name: Nginx installation check
+      ansible.builtin.shell:
+        cmd: yum list installed | grep ^nginx
+      register: nginx_check
+
+    - name: print the Vegetable name
+      ansible.builtin.debug:
+        msg: fruit name - " {{ nginx_check }} "

@@ -3,14 +3,14 @@
   become: true
   vars:
     fruit1: true
-    fruit2: false
+    fruit2: carrot
   tasks:
     - name: print the fruit name
       ansible.builtin.debug:
         msg: fruit name - mango
       when: fruit1 is false
 
-    - name: print the fruit name
+    - name: print the Vegetable name
       ansible.builtin.debug:
-        msg: fruit name - banana
-      when: fruit2 is false
+        msg: fruit name - bottle-guard
+      when: fruit2 is carrot

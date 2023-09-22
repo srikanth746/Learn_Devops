@@ -24,8 +24,7 @@
       ansible.builtin.debug:
         msg: fruit name - " {{ nginx_check }} "
 
-    - name: Python installation check
+    - name: Ignore errors check
       ansible.builtin.shell:
-        cmd: yum install python3.11 -y
-      register: python_check
-      changed_when: " '0 installed'  not in python_check.stdout"
+        cmd: yum install python -y
+      ignore_errors: yes

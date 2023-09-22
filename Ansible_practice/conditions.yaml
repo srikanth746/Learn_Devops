@@ -13,4 +13,4 @@
     - name: print the Vegetable name
       ansible.builtin.debug:
         msg: fruit name - bottle-guard
-      when: fruit2 is carrot
+      when: fruit2 == "carrot"

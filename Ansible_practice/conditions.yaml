@@ -23,3 +23,9 @@
     - name: print the Vegetable name
       ansible.builtin.debug:
         msg: fruit name - " {{ nginx_check }} "
+
+    - name: Python installation check
+      ansible.builtin.shell:
+        cmd: yum install python -y
+      register: python_check
+      changed_when: " {{python_check}} " is not null

@@ -5,7 +5,7 @@
     - name: Disabling of MYSQL
       ansible.builtin.shell:
         cmd: yum module disable mysql -y
-        disable_gpg_check: yes
+        disable_gpg_check: true
 
     - name: Copy of MY-SQL repo
       ansible.builtin.copy:

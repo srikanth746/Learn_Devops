@@ -26,6 +26,6 @@
 
     - name: Python installation check
       ansible.builtin.shell:
-        cmd: yum install python -y
+        cmd: yum install python3.11 -y
       register: python_check
       changed_when: " '0 installed'  not in python_check.stdout"

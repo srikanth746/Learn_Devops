@@ -28,4 +28,4 @@
       ansible.builtin.shell:
         cmd: yum install python -y
       register: python_check
-      changed_when: " {{python_check}} " is not null
+      changed_when: " '0 installed'  not in python_check.stdout"

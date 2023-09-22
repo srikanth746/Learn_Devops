@@ -1,11 +1,16 @@
 - name: Working on the conditions in ansible playbook
   hosts: WEB
   become: true
+  vars:
+    fruit1: true
+    fruit2: false
   tasks:
     - name: print the fruit name
       ansible.builtin.debug:
         msg: fruit name - mango
+        when: fruit1 is false
 
     - name: print the fruit name
       ansible.builtin.debug:
         msg: fruit name - banana
+        when: fruit2 is false

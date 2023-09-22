@@ -1,0 +1,15 @@
+- name: playbook for the shipping component of roboshop
+  hosts: SHIP
+  become: true
+  vars:
+    maven-1: maven
+    mysql-1: mysql
+  tasks:
+    - name: Installation of software
+      ansible.builtin.import_tasks: application.yaml
+
+    - name: Adding username and creating a dir
+      ansible.builtin.import_tasks: shipping_username.yaml
+
+    - name: Adding application requirements.
+      ansible.builtin.import_tasks: shipping_appreq.yaml

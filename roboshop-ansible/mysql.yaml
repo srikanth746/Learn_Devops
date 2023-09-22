@@ -17,7 +17,7 @@
 
     - name: restarting of mysql server for roboshop
       ansible.builtin.systemd:
-        name: mysql
+        name: mysqld
         enabled: true
         state: restarted
 

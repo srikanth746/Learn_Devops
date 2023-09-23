@@ -13,8 +13,8 @@
     - name: Adding application requirements.
       ansible.builtin.import_tasks: shipping_appreq.yaml
 
-    - name: my-sql database application
-      ansible.builtin.import_tasks: mysql_setup.yaml
+#    - name: my-sql database application
+#      ansible.builtin.import_tasks: mysql_setup.yaml
 
     - name: Cleaning maven package
       ansible.builtin.shell: mvn clean package ; mv target/shipping-1.0.jar shipping.jar

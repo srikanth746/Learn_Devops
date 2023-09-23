@@ -11,6 +11,16 @@
     - name: Adding application requirements.
       ansible.builtin.import_tasks: shipping_appreq.yaml
 
+    - name: Cleaning maven package
+      ansible.builtin.shell: mvn clean package
+      args:
+        chdir: /app
+
+    - name: copying the jar file
+      ansible.builtin.copy:
+        src: target/shipping-1.0.jar
+        dest: shipping.jar
+
     - name: Installation of My SQL service
       ansible.builtin.yum:
         name: mysql

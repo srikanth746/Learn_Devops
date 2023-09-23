@@ -6,6 +6,6 @@
 - name: Restarting the services of shipping
   ansible.builtin.systemd:
     name: shipping
-    enabled: yes
-    daemon-reload: true
     state: restarted
+    enabled: yes
+    daemon-reload: yes

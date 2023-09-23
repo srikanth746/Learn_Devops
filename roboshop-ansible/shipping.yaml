@@ -14,7 +14,7 @@
     - name: Cleaning maven package
       ansible.builtin.shell: mvn clean package
       args:
-        chdir: /app
+        chdir: app
 
     - name: copying the jar file
       ansible.builtin.copy:

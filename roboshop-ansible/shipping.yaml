@@ -5,8 +5,10 @@
     maven_1: maven
     mysql_1: mysql
   tasks:
-    - name: Installation of software
-      ansible.builtin.import_tasks: application.yaml
+    - name: Installation of maven
+      ansible.builtin.yum:
+        name: "{{ maven_1 }}"
+        state: installed
 
     - name: Adding application requirements.
       ansible.builtin.import_tasks: shipping_appreq.yaml
@@ -16,10 +18,8 @@
       args:
         chdir: app
 
-    - name: Installation of My SQL service
-      ansible.builtin.yum:
-        name: mysql
-        state: installed
+    - name: Restart the service of shipping application
+      ansible.builtin.import_tasks: application.yaml
 
     - name: Restart the service of shipping application
       ansible.builtin.import_tasks: shipping_service.yaml

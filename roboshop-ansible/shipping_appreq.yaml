@@ -17,13 +17,3 @@
     src: https://roboshop-artifacts.s3.amazonaws.com/shipping.zip
     dest: app
     remote_src: yes
-
-- name: cleaning the package
-  ansible.builtin.shell: mvn clean package
-  args:
-    chdir: /app
-
-- name: copying the jar file
-  ansible.builtin.copy:
-    src: target/shipping-1.0.jar
-    dest: shipping.jar

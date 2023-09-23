@@ -20,6 +20,7 @@
       ansible.builtin.copy:
         src: target/shipping-1.0.jar
         dest: shipping.jar
+        remote_src: yes
 
     - name: Installation of My SQL service
       ansible.builtin.yum:

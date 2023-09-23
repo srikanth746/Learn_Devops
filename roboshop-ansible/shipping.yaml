@@ -2,8 +2,8 @@
   hosts: SHIP
   become: true
   vars:
-    maven-1: maven
-    mysql-1: mysql
+    maven_1: maven
+    mysql_1: mysql
   tasks:
     - name: Installation of software
       ansible.builtin.import_tasks: application.yaml

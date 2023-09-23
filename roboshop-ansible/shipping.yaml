@@ -13,3 +13,15 @@
 
     - name: Adding application requirements.
       ansible.builtin.import_tasks: shipping_appreq.yaml
+
+    - name: Installation of My SQL service
+      ansible.builtin.yum:
+        name: mysql
+        state: installed
+
+    - name: Restart the service of shipping application
+      ansible.builtin.import_tasks: shipping_service.yaml
+
+    - name: Setting the password
+      ansible.builtin.shell: mysql -h mysql.srilearndevops.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
+

@@ -4,6 +4,10 @@
     dest: /app
     remote_src: yes
 
-- name: unzipping the shipping zip file
-  ansible.builtin.maven:
+- name: cleaning the package
+  ansible.builtin.shell: mvn clean package
 
+- name: copying the jar file
+  ansible.builtin.copy:
+    src: target/shipping-1.0.jar
+    dest: shipping.jar

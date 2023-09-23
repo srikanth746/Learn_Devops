@@ -1,8 +1,7 @@
 - name: Installation of mysql
   ansible.builtin.yum:
-    name: "{{ mysql_1 }}"
+    name: mysql
     state: installed
-  when: mysql_1 == "mysql"
 
 - name: Loading the schema
   ansible.builtin.shell: mysql -h mysql.srilearndevops.online -uroot -pRoboShop@1 < /app/schema/shipping.sql

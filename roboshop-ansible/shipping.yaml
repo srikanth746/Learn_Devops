@@ -12,15 +12,9 @@
       ansible.builtin.import_tasks: shipping_appreq.yaml
 
     - name: Cleaning maven package
-      ansible.builtin.shell: mvn clean package
+      ansible.builtin.shell: mvn clean package ; mv target/shipping-1.0.jar shipping.jar
       args:
         chdir: app
-
-    - name: copying the jar file
-      ansible.builtin.copy:
-        src: target/shipping-1.0.jar
-        dest: shipping.jar
-        remote_src: yes
 
     - name: Installation of My SQL service
       ansible.builtin.yum:

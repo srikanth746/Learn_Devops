@@ -5,5 +5,5 @@
 
 - name: Installation of mysql
   ansible.builtin.yum:
-    name: "{{ mysql }}"
+    name: "{{ mysql_1 }}"
     state: installed

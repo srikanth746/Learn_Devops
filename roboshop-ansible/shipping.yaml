@@ -8,9 +8,6 @@
     - name: Installation of software
       ansible.builtin.import_tasks: application.yaml
 
-    - name: Adding username and creating a dir
-      ansible.builtin.import_tasks: shipping_username.yaml
-
     - name: Adding application requirements.
       ansible.builtin.import_tasks: shipping_appreq.yaml
 

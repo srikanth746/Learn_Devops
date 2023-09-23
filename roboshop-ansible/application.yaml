@@ -1,9 +1,3 @@
-- name: Installation of maven
-  ansible.builtin.yum:
-    name: "{{ maven_1 }}"
-    state: installed
-  when: maven_1 == "maven"
-
 - name: Installation of mysql
   ansible.builtin.yum:
     name: "{{ mysql_1 }}"

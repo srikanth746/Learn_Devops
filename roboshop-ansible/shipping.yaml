@@ -24,8 +24,3 @@
     - name: Restart the service of shipping application
       ansible.builtin.import_tasks: shipping_service.yaml
 
-    - name: Setting the password
-      ansible.builtin.shell: mysql -h mysql.srilearndevops.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
-      args:
-        chdir: app
-

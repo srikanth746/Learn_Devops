@@ -18,8 +18,8 @@
       args:
         chdir: app
 
-    - name: Restart the service of shipping application
-      ansible.builtin.import_tasks: application.yaml
+    - name: my-sql database application
+      ansible.builtin.import_tasks: mysql_setup.yaml
 
     - name: Restart the service of shipping application
       ansible.builtin.import_tasks: shipping_service.yaml

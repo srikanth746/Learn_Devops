@@ -13,12 +13,6 @@
     - name: Adding application requirements.
       ansible.builtin.import_tasks: shipping_appreq.yaml
 
-    - name: unzipping the shipping zip file
-      ansible.builtin.unarchive:
-        src: https://roboshop-artifacts.s3.amazonaws.com/shipping.zip
-        dest: app
-        remote_src: yes
-
     - name: Cleaning maven package
       ansible.builtin.shell: mvn clean package ; mv target/shipping-1.0.jar shipping.jar
       args:

@@ -11,9 +11,3 @@
   ansible.builtin.file:
     path: app
     state: directory
-
-- name: unzipping the shipping zip file
-  ansible.builtin.unarchive:
-    src: https://roboshop-artifacts.s3.amazonaws.com/shipping.zip
-    dest: app
-    remote_src: yes

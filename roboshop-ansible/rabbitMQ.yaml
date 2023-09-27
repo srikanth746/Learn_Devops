@@ -4,11 +4,11 @@
   vars:
     rabbit_comp: rabbit-server
   tasks:
-    - name: Downloading the rabbit-er
+    - name: Downloading the rabbit-erlang repos
       ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
 
-    - name: Downloading the rabbit-er
-      ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
+    - name: Downloading the rabbit-server repos
+      ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
 
     - name: Installing rabbit-MQ server
       ansible.builtin.yum:

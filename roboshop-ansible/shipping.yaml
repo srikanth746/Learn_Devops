@@ -9,6 +9,16 @@
       ansible.builtin.yum:
         name: "{{ maven_app }}"
         state: installed
+
+    - name: Adding robo-shop user
+      ansible.builtin.user:
+        name: roboshop
+
     - name: Downloading app-preq for shipping
       ansible.builtin.import_tasks: shipping_app.yaml
 
+    - name: Setup for MySQL of shipping
+      ansible.builtin.import_tasks: shipping_mysql.yaml
+
+    - name: Setup for the MYSQL service restart
+      ansible.builtin.import_tasks: shipping_service.yaml

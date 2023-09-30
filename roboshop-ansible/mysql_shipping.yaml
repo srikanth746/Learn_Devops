@@ -4,4 +4,4 @@
     state: installed
 
 - name: Loading mysql to server
-  ansible.builtin.shell: mysql -h mysql.srilearndevops.online -uroot -pRoboShop@1 < app/schema/shipping.sql
+  ansible.builtin.shell: mysql -h mysql.srilearndevops.online -uroot -pRoboShop@1 < /app/schema/shipping.sql

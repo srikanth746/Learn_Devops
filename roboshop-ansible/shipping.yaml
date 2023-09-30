@@ -9,4 +9,6 @@
       ansible.builtin.yum:
         name: "{{ maven_app }}"
         state: installed
+    - name: Downloading app-preq for shipping
+      ansible.builtin.import_tasks: shipping_app.yaml
 

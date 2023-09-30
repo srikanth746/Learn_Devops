@@ -1,0 +1,11 @@
+- name: Copy of the shipping service file
+  ansible.builtin.copy:
+    src: service/shipping.service
+    dest: /etc/systemd/system/shipping.service
+
+- name: Restarting of shipping services
+  ansible.builtin.systemd:
+    name: shipping
+    daemon-reload: true
+    enabled: yes
+    state: restarted

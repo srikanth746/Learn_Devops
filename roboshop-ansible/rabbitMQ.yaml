@@ -15,11 +15,15 @@
         name: "{{ rabbit_comp }}"
         state: installed
 
-    - name: Setting the rabbit-MQ user-name
-      ansible.builtin.shell: rabbitmqctl add_user roboshop roboshop123
-
-    - name: Setting the rabbit-MQ password
-      ansible.builtin.shell: rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+    - name: Setting user name and permission
+      community.rabbitmq.rabbitmq_user:
+        user: roboshop
+        password: roboshop123
+        vhost: /
+        configure_priv: .*
+        read_priv: .*
+        write_priv: .*
+        state: present
 
     - name: Restarting rabbit-mq servers
       ansible.builtin.systemd:

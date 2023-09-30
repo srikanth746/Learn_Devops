@@ -24,6 +24,6 @@
       ansible.builtin.service:
         name: nginx
         enabled: true
-        state: started
+        state: restarted
 
 

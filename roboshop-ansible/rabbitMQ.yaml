@@ -2,7 +2,7 @@
   hosts: RABBITMQ
   become: true
   vars:
-    rabbit_comp: rabbit-server
+    rabbit_comp: rabbitmq-server
   tasks:
     - name: Downloading the rabbit-erlang repos
       ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash

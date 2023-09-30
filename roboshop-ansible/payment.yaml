@@ -1,0 +1,16 @@
+- name: Creating playbook for the payment application
+  hosts: PAYMENT
+  become: true
+  vars:
+    service_name: payment
+  tasks:
+    - name: Installation of python application
+      ansible.builtin.yum:
+        name:
+          - python36
+          - gcc
+          - python3-devel
+        state: installed
+
+    - name: Creating application playbook
+      ansible.builtin.import_tasks: payment_appreq.yaml

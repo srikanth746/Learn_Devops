@@ -1,7 +1,7 @@
-- name: Installation of mysql server
+- name: Installation of mysql
   ansible.builtin.yum:
     name: mysql
     state: installed
 
-- name: Load the server of mysql
-  ansible.builtin.shell: mysql -h mysql.srilearndevops.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
+- name: Loading mysql to server
+  ansible.builtin.shell: mysql -h mysql.srilearndevops.online -uroot -pRoboShop@1 < app/schema/shipping.sql

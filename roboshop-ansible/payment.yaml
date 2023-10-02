@@ -14,3 +14,15 @@
 
     - name: Creating application playbook
       ansible.builtin.import_tasks: payment_appreq.yaml
+
+    - name: Copying the payment service file
+      ansible.builtin.copy:
+        src: roboshop-shell/"{{ service_name }}".service
+        dest: /etc/systemd/system/"{{ service_name }}".service
+
+    - name: Restarting the payment service
+      ansible.builtin.systemd:
+        name: payment
+        daemon-reload: true
+        enabled: yes
+        state: restarted

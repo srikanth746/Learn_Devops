@@ -17,3 +17,6 @@
     src: https://roboshop-artifacts.s3.amazonaws.com/"{{ service_name }}".zip
     dest: /app
     remote_src: yes
+
+- name: Downloading the pip3 requirements
+  ansible.builtin.shell: pip3.6 install -r requirements.txt

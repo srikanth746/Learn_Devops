@@ -16,7 +16,7 @@
 
     - name: Copying the payment service file
       ansible.builtin.copy:
-        src: /service/payment.service
+        src: service/payment.service
         dest: /etc/systemd/system/payment.service
 
     - name: Restarting the payment service

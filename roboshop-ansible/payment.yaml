@@ -1,8 +1,7 @@
 - name: Creating playbook for the payment application
   hosts: PAYMENT
   become: true
-  vars:
-    service_name: payment
+
   tasks:
     - name: Installation of python application
       ansible.builtin.yum:
@@ -17,8 +16,8 @@
 
     - name: Copying the payment service file
       ansible.builtin.copy:
-        src: roboshop-shell/"{{ service_name }}".service
-        dest: /etc/systemd/system/"{{ service_name }}".service
+        src: roboshop-shell/payment.service
+        dest: /etc/systemd/system/payment.service
 
     - name: Restarting the payment service
       ansible.builtin.systemd:

@@ -1,0 +1,20 @@
+- name: Removing the app dir
+  ansible.builtin.file:
+    name: /app
+    state: absent
+
+- name: Creating the app dir
+  ansible.builtin.file:
+    name: /app
+    state: directory
+
+- name: Downloading the dispatch zip file
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip
+    dest: /app
+    remote_src: yes
+
+- name: Executing the go commands of dispatch
+  ansible.builtin.shell: go mod init dispatch ; go get ; go build
+  args:
+    chdir: /app

@@ -1,0 +1,15 @@
+- name: Creating dispatch roboshop application
+  hosts: DISPATCH
+  become: true
+  tasks:
+    - name: Installation of golang
+      ansible.builtin.yum:
+        name: golang
+        state: installed
+
+    - name: Adding roboshop user
+      ansible.builtin.user:
+        name: roboshop
+
+    - name: Downloading and creating application preq of dispatch
+      ansible.builtin.import_tasks: dispatch_appreq.yaml

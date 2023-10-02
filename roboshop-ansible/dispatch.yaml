@@ -13,3 +13,15 @@
 
     - name: Downloading and creating application preq of dispatch
       ansible.builtin.import_tasks: dispatch_appreq.yaml
+
+    - name: Copy the service module of dispatch
+      ansible.builtin.copy:
+        src: service/dispatch.service
+        dest: /etc/systemd/system/dispatch.service
+
+    - name: Restarting the dispatch services
+      ansible.builtin.systemd:
+        name: dispatch
+        daemon-reload: true
+        enabled: yes
+        state: restarted

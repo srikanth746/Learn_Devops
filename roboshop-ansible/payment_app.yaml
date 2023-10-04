@@ -1,0 +1,15 @@
+- name: Remove the existing app dir
+  ansible.builtin.file:
+    name: /app
+    state: absent
+
+- name: Create  app dir
+  ansible.builtin.file:
+    name: /app
+    state: directory
+
+- name: Downloading the zip file for payment
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/payment.zip
+    dest: /app
+    remote_src: yes

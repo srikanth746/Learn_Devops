@@ -1,0 +1,26 @@
+- name: Playbook for payment function
+  hosts: PAY
+  become: true
+  tasks:
+    - name: Install python
+      ansible.builtin.yum:
+        name:
+          - python36
+          - gcc
+          - python3-devel
+        state: installed
+
+    - name: Adding roboshop user
+      ansible.builtin.user:
+        name: roboshop
+
+    - name: Importing application preq file
+      ansible.builtin.import_tasks: payment_app.yaml
+
+    - name: Installation of pip3 requirements
+      ansible.builtin.shell: pip3.6 install -r requirements.txt
+      args:
+        chdir: /app
+
+    - name: Restarting the payment service
+      ansible.builtin.import_tasks: payment_service.yaml

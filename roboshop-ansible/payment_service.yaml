@@ -1,0 +1,4 @@
+- name: Copying the content of service file
+  ansible.builtin.copy:
+    src: service/payment.service
+    dest: /etc/systemd/system/payment.service

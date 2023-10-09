@@ -1,8 +1,6 @@
 - name: Playbook for rabbitMQ application
   hosts: RABBITMQ
   become: true
-  vars:
-    rabbit_comp: rabbitmq-server
   tasks:
     - name: Downloading the rabbit-erlang repos
       ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
@@ -12,8 +10,14 @@
 
     - name: Installing rabbit-MQ server
       ansible.builtin.yum:
-        name: "{{ rabbit_comp }}"
+        name: rabbitmq-server
         state: installed
+
+    - name: Restarting rabbit-mq servers
+      ansible.builtin.systemd:
+        name: rabbitmq-server
+        state: restarted
+        enabled: yes
 
     - name: Setting user name and permission
       community.rabbitmq.rabbitmq_user:
@@ -24,9 +28,3 @@
         read_priv: .*
         write_priv: .*
         state: present
-
-    - name: Restarting rabbit-mq servers
-      ansible.builtin.systemd:
-        name: "{{ rabbit_comp }}"
-        enabled: yes
-        state: restarted

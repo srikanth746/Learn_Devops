@@ -13,12 +13,6 @@
         name: rabbitmq-server
         state: installed
 
-    - name: Restarting rabbit-mq servers
-      ansible.builtin.systemd:
-        name: rabbitmq-server
-        state: restarted
-        enabled: yes
-
     - name: Setting user name and permission
       community.rabbitmq.rabbitmq_user:
         user: roboshop
@@ -28,3 +22,19 @@
         read_priv: .*
         write_priv: .*
         state: present
+
+    - name: Restarting rabbit-mq servers
+      ansible.builtin.systemd:
+        name: rabbitmq-server
+        state: restarted
+        enabled: yes
+
+#    - name: Setting user name and permission
+#      community.rabbitmq.rabbitmq_user:
+#        user: roboshop
+#        password: roboshop123
+#        vhost: /
+#        configure_priv: .*
+#        read_priv: .*
+#        write_priv: .*
+#        state: present

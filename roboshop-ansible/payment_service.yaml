@@ -2,3 +2,10 @@
   ansible.builtin.copy:
     src: service/payment.service
     dest: /etc/systemd/system/payment.service
+
+- name: Restarting the payment service.
+  ansible.builtin.systemd:
+    name: payment
+    daemon-reload: true
+    enabled: yes
+    state: restarted

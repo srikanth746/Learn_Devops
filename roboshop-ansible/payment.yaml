@@ -20,7 +20,7 @@
     - name: Installation of pip3 requirements
       ansible.builtin.shell: pip3.6 install -r requirements.txt
       args:
-        chdir: /app
+        chdir: app
 
     - name: Restarting the payment service
       ansible.builtin.import_tasks: payment_service.yaml

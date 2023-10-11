@@ -1,0 +1,26 @@
+- name: Install nginx
+  ansible.builtin.yum:
+    name: "{{ webserver }}"
+    state: installed
+
+- name: Copying roboshop conf file
+  ansible.builtin.copy:
+    src: roles/frontend/files/roboshop.conf
+    dest: /etc/nginx/default.d/roboshop.conf
+
+- name: Remove default web server of nginx
+  ansible.builtin.file:
+    path: /usr/share/nginx/html/*
+    state: absent
+
+- name: Downloading web frontend zip file
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/{{ component }}.zip
+    dest: /usr/share/nginx/html
+    remote_src: yes
+
+- name: Restarting of nginx web service
+  ansible.builtin.service:
+    name: "{{ webserver }}"
+    enabled: true
+    state: restarted

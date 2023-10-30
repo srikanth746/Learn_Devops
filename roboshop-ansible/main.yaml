@@ -1,0 +1,6 @@
+---
+- name: Roles setup for roboshop project
+  hosts: all
+  become: true
+  roles:
+    - "{{ component }}"

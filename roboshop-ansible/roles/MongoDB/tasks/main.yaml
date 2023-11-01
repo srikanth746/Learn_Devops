@@ -1,6 +1,6 @@
 - name: Copying the mongo db repo file
   ansible.builtin.copy:
-    src: MongoDB/files/mongod.repo
+    src: {{ app_name }}/files/mongod.repo
     dest: /etc/yum.repos.d/mongo.repo
 
 - name: Installation of mongo-db server
@@ -10,11 +10,11 @@
 
 - name: Replacing the Listen Address of MongoDB
   ansible.builtin.replace:
-    path: /etc/mongod.conf
+    path: /etc/{{ file_name }}.conf
     regexp: 127.0.0.1
     replace: 0.0.0.0
 
 - name: Starting the mongo-db service
   ansible.builtin.service:
-    name: mongod
+    name: {{ file_name }}
     state: restarted

@@ -1,6 +1,6 @@
 - name: Copying the mongo db repo file
   ansible.builtin.copy:
-    src: {{ app_name }}/files/mongod.repo
+    src: "{{ app_name }}"/files/mongod.repo
     dest: /etc/yum.repos.d/mongo.repo
 
 - name: Installation of mongo-db server
@@ -16,5 +16,5 @@
 
 - name: Starting the mongo-db service
   ansible.builtin.service:
-    name: {{ file_name }}
+    name: "{{ file_name }}"
     state: restarted

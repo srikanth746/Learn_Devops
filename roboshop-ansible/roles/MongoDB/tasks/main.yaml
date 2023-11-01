@@ -14,7 +14,7 @@
     regexp: 127.0.0.1
     replace: 0.0.0.0
 
-- name: Starting the mongo-db service
+- name: Mongo-DB service start
   ansible.builtin.service:
-    name: "{{ file_name }}"
-    state: restarted
+    name: mongod
+    state: started

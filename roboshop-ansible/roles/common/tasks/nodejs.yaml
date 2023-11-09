@@ -1,0 +1,26 @@
+- name: Downloading the node JS setup file
+  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+
+- name: Node.js installation
+  ansible.builtin.yum:
+    name: nodejs
+    state: installed
+
+- name: removing old app dir
+  ansible.builtin.file:
+    path: /app
+    state: absent
+
+- name: Creating new app dir
+  ansible.builtin.file:
+    path: /app
+    state: directory
+
+- name: Adding robo-shop user
+  ansible.builtin.user:
+    name: roboshop
+
+- name: Installation of node.js dependencies
+  ansible.builtin.shell: npm install
+  args:
+    chdir: /app

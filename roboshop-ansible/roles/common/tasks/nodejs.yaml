@@ -3,7 +3,7 @@
 
 - name: Node.js installation
   ansible.builtin.yum:
-    name: nodejs
+    name: "{{ node_app }}"
     state: installed
 
 - name: removing old app dir

@@ -1,4 +1,27 @@
-- name: Importing node.js setup role
+- name: Importing node.js setup
   ansible.builtin.import_roles:
     name: common
     tasks_from: nodejs
+
+- name: Download the zip file send by developer
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
+    dest: /app
+    remote_src: yes
+
+- name: Import mongo-schema creation setup
+  ansible.builtin.import_roles:
+    name: common
+    tasks_from: mongo-schema
+
+- name: Copying the service file to systemd
+  ansible.builtin.copy:
+    src: service/catalogue.service
+    dest: /etc/systemd/system/catalogue.service
+
+- name: Restarting the catalogue services
+  ansible.builtin.systemd:
+    name: "{{ component }}"
+    state: restarted
+    enabled: yes
+    daemon_reload: true

@@ -9,6 +9,11 @@
     dest: /app
     remote_src: yes
 
+- name: Installation of catalogue dependencies
+  ansible.builtin.shell: npm install
+  args:
+    chdir: /app
+
 - name: Import mongo-schema creation setup
   ansible.builtin.import_role:
     name: common

@@ -19,8 +19,3 @@
 - name: Adding robo-shop user
   ansible.builtin.user:
     name: roboshop
-
-- name: Installation of node.js dependencies
-  ansible.builtin.shell: npm install
-  args:
-    chdir: /app

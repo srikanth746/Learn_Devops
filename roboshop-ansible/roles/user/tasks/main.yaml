@@ -1,0 +1,32 @@
+- name: Node.JS installation for user
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: nodejs
+
+- name: Download the zip file send by developer
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/user.zip
+    dest: /app
+    remote_src: yes
+
+- name: Change the directory and install the node JS dependices
+  ansible.builtin.shell: npm install
+  args:
+    chdir: /app
+
+- name: Mongo schema setup for user
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: mongo-schema
+
+- name: Copying the systemd service file
+  ansible.builtin.copy:
+    src: service/user.service
+    dest: /etc/systemd/system/user.service
+
+- name: Restarting the user services
+  ansible.builtin.systemd:
+    name: "{{ component }}"
+    state: restarted
+    enabled: yes
+    daemon_reload: true

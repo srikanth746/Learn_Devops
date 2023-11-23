@@ -1,0 +1,27 @@
+- name: Importing node.js setup
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: nodejs
+
+- name: Download the zip file send by developer
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/cart.zip
+    dest: /app
+    remote_src: yes
+
+- name: Change the directory and install the node JS dependices
+  ansible.builtin.shell: npm install
+  args:
+    chdir: /app
+
+- name: Copying the systemd service file
+  ansible.builtin.copy:
+    src: service/cart.service
+    dest: /etc/systemd/system/cart.service
+
+- name: Restarting the cart services
+  ansible.builtin.systemd:
+    name: "{{ component }}"
+    state: restarted
+    enabled: yes
+    daemon_reload: true

@@ -1,0 +1,25 @@
+- name: Installation of redis
+  ansible.builtin.yum:
+    name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+    state: installed
+    disable_gpg_check: true
+
+- name: Enable redis module for roboshop
+  ansible.builtin.shell: yum module enable redis:remi-6.2 -y
+
+- name: Installation of redis
+  ansible.builtin.yum:
+    name: "{{ component }}"
+    state: installed
+
+- name: Updated the listen address
+  ansible.builtin.replace:
+    path: /etc/redis/redis.conf
+    regexp: 127.0.0.1
+    replace: 0.0.0.0
+
+- name: Restarting the redis configuration
+  ansible.builtin.systemd:
+    name: "{{ component }}"
+    enabled: yes
+    state: restarted

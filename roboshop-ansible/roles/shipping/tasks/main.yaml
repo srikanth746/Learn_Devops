@@ -10,12 +10,12 @@
 - name: Import shipping app role
   ansible.builtin.import_role:
     name: "{{ component }}"
-    task_from: "{{ ship_app }}"
+    tasks_from: "{{ ship_app }}"
 
 - name: Import shipping mysql role
   ansible.builtin.import_role:
     name: "{{ component }}"
-    task_from: "{{ ship_mysql }}"
+    tasks_from: "{{ ship_mysql }}"
 
 - name: Copy of the "{{ component }}" service file
   ansible.builtin.copy:

@@ -5,3 +5,22 @@
       - "{{ gcc_name }}"
       - "{{ python3_name }}"
     state: installed
+
+- name: Adding roboshop user
+  ansible.builtin.user:
+    name: roboshop
+
+- name: Importing payment application role
+  ansible.builtin.role:
+    name: " {{ component }}"
+    tasks_from: "{{ task_name }}"
+
+- name: Installation of pip3 requirements
+  ansible.builtin.shell: pip3.6 install -r requirements.txt
+  args:
+    chdir: app
+
+- name: Importing payment service role
+  ansible.builtin.role:
+    name: " {{ component }}"
+    tasks_from: "{{ service_name }}"

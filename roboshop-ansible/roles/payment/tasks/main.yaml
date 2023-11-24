@@ -1,0 +1,7 @@
+- name: Install python
+  ansible.builtin.yum:
+    name:
+      - "{{ python_name }}"
+      - "{{ gcc_name }}"
+      - "{{ python3_name }}"
+    state: installed

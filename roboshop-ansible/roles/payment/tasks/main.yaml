@@ -2,7 +2,7 @@
   ansible.builtin.yum:
     name:
       - "{{ python_name }}"
-      - "{{ gcc }}"
+      - "{{ gcc_name }}"
       - "{{ python_version }}"
     state: installed
 

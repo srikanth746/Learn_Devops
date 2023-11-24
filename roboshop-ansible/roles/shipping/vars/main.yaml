@@ -1,3 +1,4 @@
 maven_app: maven
 ship_app: app_shipping
 ship_mysql: mysql_shipping
+mysql_app: mysql

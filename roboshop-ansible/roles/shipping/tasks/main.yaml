@@ -16,3 +16,15 @@
   ansible.builtin.import_role:
     name: "{{ component }}"
     task_from: "{{ ship_mysql }}"
+
+- name: Copy of the "{{ component }}" service file
+  ansible.builtin.copy:
+    src: service/"{{ component }}".service
+    dest: /etc/systemd/system/"{{ component }}".service
+
+- name: Restarting of "{{ component }}" services
+  ansible.builtin.systemd:
+    name: "{{ component }}"
+    daemon-reload: true
+    enabled: yes
+    state: restarted

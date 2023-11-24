@@ -13,7 +13,7 @@
 - name: Import payment application role
   ansible.builtin.import_role:
     name: "{{ component }}"
-    tasks_from: application_pay.yaml
+    tasks_from: application_pay
 
 - name: Copying the content of service file
   ansible.builtin.copy:

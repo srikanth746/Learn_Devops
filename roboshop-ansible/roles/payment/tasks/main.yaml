@@ -10,8 +10,8 @@
   ansible.builtin.user:
     name: roboshop
 
-- name: Importing payment application role
-  ansible.builtin.role:
+- name: Importing node.js setup
+  ansible.builtin.import_role:
     name: " {{ component }}"
     tasks_from: "{{ task_name }}"
 

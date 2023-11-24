@@ -1,0 +1,8 @@
+- name: installation of maven
+  ansible.builtin.yum:
+    name: "{{ maven_app }}"
+    state: installed
+
+- name: Adding robo-shop user
+  ansible.builtin.user:
+    name: roboshop

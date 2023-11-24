@@ -1,5 +1,0 @@
-python_name: python36
-gcc_name: gcc
-python3_name: python3-devel
-task_name: app_payment
-service_name: service_pay

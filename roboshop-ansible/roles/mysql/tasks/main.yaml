@@ -8,12 +8,12 @@
 
 - name: Installation of MYSQL server
   ansible.builtin.yum:
-    name: mysql-community-server
+    name: "{{ my_server }}"
     state: installed
 
 - name: restarting of mysql server for roboshop
   ansible.builtin.systemd:
-    name: mysqld
+    name: "{{ my_app }}"
     enabled: true
     state: restarted
 

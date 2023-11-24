@@ -1,0 +1,2 @@
+my_server: mysql-community-server
+my_app: mysqld

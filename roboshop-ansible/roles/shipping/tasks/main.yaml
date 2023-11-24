@@ -6,3 +6,13 @@
 - name: Adding robo-shop user
   ansible.builtin.user:
     name: roboshop
+
+- name: Import shipping app role
+  ansible.builtin.import_role:
+    name: "{{ component }}"
+    task_from: "{{ ship_app }}"
+
+- name: Import shipping mysql role
+  ansible.builtin.import_role:
+    name: "{{ component }}"
+    task_from: "{{ ship_mysql }}"

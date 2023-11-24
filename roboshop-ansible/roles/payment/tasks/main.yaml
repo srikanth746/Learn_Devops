@@ -1,0 +1,29 @@
+- name: Install python
+  ansible.builtin.yum:
+    name:
+      - "{{ python_name }}"
+      - "{{ gcc }}"
+      - "{{ python_version }}"
+    state: installed
+
+- name: Adding roboshop user
+  ansible.builtin.user:
+    name: roboshop
+
+- name: Import payment application role
+  ansible.builtin.import_role:
+    name: "{{ component }}"
+    tasks_from: application_pay.yaml
+
+- name: Copying the content of service file
+  ansible.builtin.copy:
+    src: roles/payment/files/payment.service
+    dest: /etc/systemd/system/payment.service
+
+- name: Restarting the payment service.
+  ansible.builtin.systemd:
+    name: "{{ component }}"
+    daemon-reload: true
+    enabled: yes
+    state: restarted
+

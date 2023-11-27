@@ -1,0 +1,14 @@
+- name: data types in ansible
+  hosts: localhost
+  become: true
+  vars:
+    num: 12
+    name: srikanth
+    check: true
+  tasks:
+    name: printing different data types
+    ansible.builtin.debug:
+      msg:
+        numerical - "{{ num }}"
+        name - "{{ name }}"
+        check - "{{ check }}"

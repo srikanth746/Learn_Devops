@@ -7,3 +7,9 @@
     - name: Access play level variable
       ansible.builtin.debug:
         msg: play level variable {{ a_name }}
+
+    - name: Access local level variable
+      ansible.builtin.debug:
+        msg: play level variable {{ local_name }}
+      vars:
+        local_name: local.level.com

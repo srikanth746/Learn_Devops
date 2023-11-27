@@ -1,5 +1,5 @@
 - name: Playbook for payment function
-  hosts: PAY
+  hosts: payment
   become: true
   tasks:
     - name: Install python

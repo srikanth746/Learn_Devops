@@ -1,6 +1,6 @@
 - name: Copying the content of service file
   ansible.builtin.copy:
-    src: roboshop-ansible/service/payment.service
+    src: payment.service
     dest: /etc/systemd/system/payment.service
 
 - name: Restarting the payment service.

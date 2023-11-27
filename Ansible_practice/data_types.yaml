@@ -11,4 +11,4 @@
       msg:
         numerical - "{{ num }}"
         name - "{{ name }}"
-        check - "{{ check }}"
+    when: check

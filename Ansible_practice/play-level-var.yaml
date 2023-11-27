@@ -1,8 +1,8 @@
 - name: play level variables demo
   become: true
   vars:
-    var-a: play.level.com
+    a_name: play.level.com
   tasks:
     - name: Access play level variable
       ansible.builtin.debug:
-        msg: play level variable {{ var-a }}
+        msg: play level variable {{ a_name }}

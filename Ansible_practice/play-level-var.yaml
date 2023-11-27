@@ -1,6 +1,6 @@
 - name: play level variables demo
   become: true
-  hosts: all
+  hosts: localhost
   vars:
     a_name: play.level.com
   tasks:

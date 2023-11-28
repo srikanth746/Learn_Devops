@@ -1,10 +1,7 @@
-- name: Ansible datatypes demo
+- name: demo of ansible data types
   hosts: localhost
   become: true
-  vars:
-    num: 13
-    name_fruit: Mango
   tasks:
-    name: printing data types
-    ansible.builtin.debug:
-      msg: "{{ num }}"
+    - name: data type printing
+      ansible.builtin.debug:
+        msg: python3

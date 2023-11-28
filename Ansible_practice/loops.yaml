@@ -1,19 +1,13 @@
-- name: data types in ansible
-  hosts: localhost
+- name: loops in ansible
   become: true
+  hosts: localhost
   vars:
     fruits:
-      - mango
       - orange
+      - apple
+      - mango
   tasks:
-    name: printing the values in loops
-    ansible.builtin.debug:
-      msg: fruits_name - {{ item }}
-      loop: "{{ fruits }}"
-
-      name: printing sub values also
+    - name: Iteration of fruits
       ansible.builtin.debug:
-        msg: veg name - {{ item.name }},quantity - {{ quantity.name }}
-        loop:
-          - { name: "potato" , quantity: 100 }
-          - { name: "tomato" , quantity: 200 }
+        msg: fruits name - {{ item }}
+        loop: "{{ fruits }}"

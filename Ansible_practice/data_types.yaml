@@ -3,9 +3,9 @@
   become: true
   vars:
     num: 13
-    name: "Mango"
+    name_fruit: "Mango"
     boo: true
   tasks:
     name: printing data types
     ansible.builtin.debug:
-      msg: Hello
+      msg: Hello - "{{ name_fruit }}"

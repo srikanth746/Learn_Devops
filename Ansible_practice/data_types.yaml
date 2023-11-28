@@ -8,4 +8,4 @@
   tasks:
     name: printing data types
     ansible.builtin.debug:
-      msg: Hello - "{{ name_fruit }}"
+      msg: Hello - {{ name_fruit }}

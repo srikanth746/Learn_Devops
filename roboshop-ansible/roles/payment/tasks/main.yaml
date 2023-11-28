@@ -15,6 +15,11 @@
     name: payment
     tasks_from: pay_app.yaml
 
+- name: Installation of pip3 requirements
+  ansible.builtin.shell: pip3.6 install -r requirements.txt
+  args:
+    chdir: app
+
 - name: Copying the service file
   ansible.builtin.copy:
     src: service/payment.service

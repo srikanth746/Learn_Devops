@@ -1,7 +1,10 @@
 - name: demo of ansible data types
   hosts: localhost
   become: true
+  vars:
+    num: 12
+    fruits: mango
   tasks:
     - name: data type printing
       ansible.builtin.debug:
-        msg: python3
+        msg: {{ num }}

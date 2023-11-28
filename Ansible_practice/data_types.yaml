@@ -5,3 +5,7 @@
     num: 13
     name: "Mango"
     boo: true
+  tasks:
+    name: printing data types
+    ansible.builtin.debug:
+      msg: Hello

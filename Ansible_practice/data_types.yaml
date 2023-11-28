@@ -1,12 +1,7 @@
-- name: data types in ansible
+- name: Ansible datatypes demo
   hosts: localhost
   become: true
   vars:
-    num: 12
-    name: srikanth
-  tasks:
-    name: printing different data types
-    ansible.builtin.debug:
-      msg:
-        numerical - "{{ num }}"
-        name - "{{ name }}"
+    num: 13
+    name: "Mango"
+    boo: true

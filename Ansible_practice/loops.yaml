@@ -11,3 +11,12 @@
       ansible.builtin.debug:
         msg: fruits name - "{{ item }}"
       loop: "{{ fruits }}"
+
+    - name: Iteration of veggies and quantity
+      ansible.builtin.debug:
+        msg: veggies name - "{{ item.name }}" , quantity is - "{{ item.quantity }}"
+      loop: "{{ veggies }}"
+      vars:
+        veggies:
+          - { name: potato, quantity: 100 }
+          - {name: lady's finger, quantity: 50 }

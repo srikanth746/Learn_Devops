@@ -7,4 +7,4 @@
   tasks:
     - name: data type printing
       ansible.builtin.debug:
-        msg: {{ num }}
+        msg: "{{ num }}"

@@ -4,11 +4,9 @@
   vars:
     num: 12
     name: srikanth
-    check: true
   tasks:
     name: printing different data types
     ansible.builtin.debug:
       msg:
         numerical - "{{ num }}"
         name - "{{ name }}"
-    when: check

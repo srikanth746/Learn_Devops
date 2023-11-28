@@ -9,3 +9,4 @@
     - name: data type printing
       ansible.builtin.debug:
         msg: number - {{ num }}, fruit_name - {{ fruits }}
+      when: {{ boo }}

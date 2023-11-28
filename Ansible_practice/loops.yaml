@@ -10,4 +10,4 @@
     - name: Iteration of fruits
       ansible.builtin.debug:
         msg: fruits name - "{{ item }}"
-        loop: "{{ fruits }}"
+      loop: "{{ fruits }}"

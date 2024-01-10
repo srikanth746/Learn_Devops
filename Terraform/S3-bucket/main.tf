@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "my-S3-bucket" {
-  bucket = "my-s3-bucket"
+  bucket = var.bucket-name
 
   tags = {
     Name        = "My-bucket"

@@ -10,7 +10,7 @@ terraform {
 
 #Mentioned the required location
 provider "aws"{
-  region: "us-east-1"
+  region = "us-east-1"
 }
 
 #Creating the ec2 instance resource

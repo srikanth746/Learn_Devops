@@ -7,11 +7,6 @@ terraform {
   }
 }
 
-resource "aws_s3_bucket" "example" {
-  bucket = "my-tf-test-bucket_4467"
-
-  tags = {
-    Name        = "My bucket"
-    Environment = "Dev"
-  }
+provider "aws" {
+  region = "us-east-1"
 }

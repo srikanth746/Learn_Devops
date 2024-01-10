@@ -7,13 +7,8 @@ terraform {
   }
 }
 
-provider "aws" {
-  region = "eu-central-1"
-
-}
-
 resource "aws_s3_bucket" "example" {
-  bucket = "my-tf-test-bucket"
+  bucket = "my-tf-test-bucket_4467"
 
   tags = {
     Name        = "My bucket"

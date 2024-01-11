@@ -13,9 +13,7 @@ provider "aws" {
 
 resource "aws_s3_bucket" "example12" {
   bucket = "my-test-bucket-11012024"
-
+}
   tags = {
     Name        = "My bucket"
-    Environment = "Dev"
   }
-}

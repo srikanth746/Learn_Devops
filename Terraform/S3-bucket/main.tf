@@ -11,7 +11,7 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_s3_bucket" "example" {
+resource "aws_s3_bucket" "example12" {
   bucket = "my-test-bucket-11012024"
 
   tags = {

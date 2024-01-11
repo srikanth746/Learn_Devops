@@ -14,7 +14,7 @@ provider "aws"{
 }
 
 #Creating the ec2 instance resource
-resource "aws_instance" "example" {
+resource "aws_instance" "example-instance" {
   ami           = "ami-0c7217cdde317cfec"
   instance_type = "t2.micro"
 

@@ -13,6 +13,10 @@ provider "aws" {
   secret_key = "wkfhVQ4hk/gb5yJs1EGkbUioisGisuSJTerYjzAq"
 }
 
-resource "aws_s3_bucket" "bucket-example"{
-  bucket = "mybucket"
+#resource "aws_s3_bucket" "bucket-example" {
+#  bucket = "my-bucket"
+#}
+
+resource "aws_s3_bucket" "bucket-test" {
+  bucket = "bucket-012024"
 }

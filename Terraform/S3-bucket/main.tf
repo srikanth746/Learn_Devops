@@ -8,15 +8,14 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-west-2"
-  access_key = "AKIAW5737UMMKBXECJEH"
-  secret_key = "wkfhVQ4hk/gb5yJs1EGkbUioisGisuSJTerYjzAq"
+  region = "us-east-1"
 }
 
-#resource "aws_s3_bucket" "bucket-example" {
-#  bucket = "my-bucket"
-#}
-
 resource "aws_s3_bucket" "bucket-test" {
-  bucket = "bucket-012024"
+  bucket = "bucket-01092024"
+
+  tags = {
+    name = "my-bucket-list"
+    Environment = "Dev"
+  }
 }

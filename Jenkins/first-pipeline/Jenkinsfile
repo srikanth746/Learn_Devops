@@ -8,7 +8,7 @@ pipeline {
         }
         stage('apache installation'){
             steps{
-                sh 'sudo apt install http -y'
+                sh 'python --version'
             }
         }
     }

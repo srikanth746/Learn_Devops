@@ -3,9 +3,11 @@ pipeline {
     stages{
         stage('frontend'){
             agent {
-                docker {
-                    image: 'node16-alpine'
-                }
+                docker { image: 'node16-alpine' }
+            }
+
+            steps {
+                sh 'node -version'
             }
         }
     }

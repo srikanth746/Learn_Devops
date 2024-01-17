@@ -20,13 +20,6 @@ pipeline {
                 sh ' mvn --version '
             }
         }
-        stage('python'){
-        agent {
-            docker { image 'node:16-alpine' }
-        }
-        steps{
-            sh 'apt install python3 -y'
-        }
-        }
+
      }
 }

@@ -6,9 +6,9 @@ pipeline {
                echo 'hello-jenkins!!'
             }
         }
-        stage('Python installation'){
+        stage('apache installation'){
             steps{
-                sh 'apt install python3 -y'
+                sh 'sudo apt install http -y'
             }
         }
     }

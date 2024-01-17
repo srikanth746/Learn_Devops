@@ -25,7 +25,7 @@ pipeline {
             docker { image 'node:16-alpine' }
         }
         steps{
-            sh 'sudo apt install python3 -y'
+            sh 'apt install python3 -y'
         }
         }
      }

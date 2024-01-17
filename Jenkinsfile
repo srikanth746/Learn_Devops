@@ -20,6 +20,15 @@ pipeline {
                 sh ' mvn --version '
             }
         }
+        stage('python'){
+            agent {
+                docker { image 'node:16-alpine' }
+            }
+
+            steps {
+                sh ' yum install python3 -y '
+            }
+        }
 
      }
 }

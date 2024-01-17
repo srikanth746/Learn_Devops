@@ -1,6 +1,6 @@
 pipeline {
-
-    stages{
+    agent any
+     stages{
         stage('node-version'){
             agent {
                 docker { image 'node:16-alpine' }
@@ -28,5 +28,5 @@ pipeline {
             sh 'sudo apt install python3 -y'
         }
         }
-    }
+     }
 }

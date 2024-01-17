@@ -8,7 +8,7 @@ pipeline {
         }
         stage('apache installation'){
             steps{
-                sh 'python --version'
+                sh 'node --version'
             }
         }
     }

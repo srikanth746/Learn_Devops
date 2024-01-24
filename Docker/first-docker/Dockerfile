@@ -13,5 +13,6 @@ RUN apt-get update && apt-get install -y python3 python3-pip
 #Set the environment variables.
 ENV NAME World
 
-#Commands to run the python file.
-CMD["python3" , "first-python.py"]
+#Commands to run the python file.exit
+
+CMD ["python3" , "first-python.py"]

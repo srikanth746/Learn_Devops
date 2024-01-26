@@ -1,5 +1,5 @@
 # getting the base image
-FROM UBUNTU
+FROM ubuntu
 
 #Now add the working directory
 WORKDIR /app

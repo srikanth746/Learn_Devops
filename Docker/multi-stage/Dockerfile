@@ -2,12 +2,10 @@
 ############################
 #   BASE IMAGE
 ############################
-FROM ubuntu as build
+FROM ubuntu AS build
 
-#Add the work dir
 WORKDIR /app
 
-#copy the content to the specified location
 COPY . /app
 
 RUN apt-get update && \
@@ -19,8 +17,6 @@ RUN apt-get update && \
 ########################################################
 
 FROM gcr.io/distroless/python3
-
-COPY -- from = build /app .
 
 ENTRYPOINT [ "python3"]
 

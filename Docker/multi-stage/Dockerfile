@@ -15,7 +15,7 @@ RUN apt-get update && \
 
 FROM python
 
-COPY -- from = build /app .
+COPY -- from = build /app /app
 
 ENTRYPOINT [ "python3"]
 

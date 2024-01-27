@@ -18,7 +18,7 @@ RUN apt-get update && \
 #     MULTI container
 ########################################################
 
-FROM python
+FROM gcr.io/distroless/python3
 
 COPY -- from = build /app .
 

@@ -14,6 +14,6 @@ RUN apt-get update && apt-get install -y python3 python3-pip
 #####################
 FROM gcr.io/distroless/python3
 
-COPY --from=build /app .
+COPY --from=build /app /app
 
 ENTRYPOINT ["first-python.py"]

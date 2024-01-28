@@ -1,7 +1,7 @@
 ######################
 # BASE
 ######################
-FROM ubuntu
+FROM ubuntu AS build
 
 WORKDIR /app
 
@@ -13,5 +13,7 @@ RUN apt-get update && apt-get install -y python3 python3-pip
 # Multi-stage-1
 #####################
 FROM python
+
+COPY --from=build /app .
 
 CMD ["python3","first-python.py"]

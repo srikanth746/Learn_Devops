@@ -18,6 +18,4 @@ RUN apt-get update && \
 
 FROM gcr.io/distroless/python3
 
-ENTRYPOINT [ "python3"]
-
-CMD ["first-python.py"]
+CMD ["python3","first-python.py"]

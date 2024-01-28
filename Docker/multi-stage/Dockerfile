@@ -16,4 +16,4 @@ FROM gcr.io/distroless/python3
 
 COPY --from=build /app .
 
-CMD ["python3","first-python.py"]
+CMD ["first-python.py"]

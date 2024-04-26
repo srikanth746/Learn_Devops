@@ -10,6 +10,7 @@
         instance_name: "new-database"
         db_engine: MySQL
         storage_size: 20
+        instance_type: db.m1.small
         username: mysql_admin
         password: insecure1
         tags:

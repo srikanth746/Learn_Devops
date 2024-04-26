@@ -1,0 +1,16 @@
+- name: Creation of RDS in aws
+  hosts: localhost
+  connection: true
+  gather_facts: false
+
+  tasks:
+    - name: create rds instance
+    - rds:
+        command: create
+        instance_name: "new-database"
+        db_engine: MySQL
+        storage_size: 20
+        username: mysql_admin
+        password: insecure1
+        tags:
+          Name: testing-rds

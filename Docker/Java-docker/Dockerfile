@@ -9,7 +9,7 @@ WORKDIR /app
 COPY . /app
 
 #Lets download the java lib
-RUN apt-get update && apt install openjdk-11-jre
+RUN apt-get update && apt install openjdk-11-jre && apt install default-jdk
 
 ENTRYPOINT["javac","simple.java"]
 CMD["java","simple"]

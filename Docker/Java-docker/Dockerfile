@@ -9,3 +9,5 @@ RUN apt-get update && apt install openjdk-11-jre -y && apt install default-jdk -
 
 CMD javac Simple.java && java Simple
 
+EXPOSE 6000
+

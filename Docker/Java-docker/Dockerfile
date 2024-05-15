@@ -11,6 +11,5 @@ COPY . /app
 #Lets download the java lib
 RUN apt-get update && apt install openjdk-11-jre && apt install default-jdk
 
-ENTRYPOINT["javac","simple.java"]
-CMD["java","simple"]
+CMD javac Simple.java && java Simple
 

@@ -15,4 +15,4 @@ RUN apt-get update && apt-get install -y python3 python3-pip
 
 #Commands to run the python file.exit
 
-CMD ["python3" , "first-python.py", "runserver", "0.0.0.0:8080"]
+CMD ["python3" , "first-python.py"]

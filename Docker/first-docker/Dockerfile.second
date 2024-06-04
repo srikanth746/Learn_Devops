@@ -11,4 +11,4 @@ ARG Build_number
 ENV build_number=${Build_number}
 
 #Install the required packages to run the docker python script.
-RUN apt-get update && apt-get install zip -y && apt install nginx 
+RUN apt-get update && apt-get install zip -y && apt install nginx -y

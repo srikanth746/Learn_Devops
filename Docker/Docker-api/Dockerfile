@@ -2,8 +2,8 @@ FROM ubuntu:latest
 
 #Installation of java dependenices .
 RUN apt-get update && \
-    apt-get install -y openjdk-11-jdk && \
-    apt-get install -y maven && \
+    apt-get install openjdk-11-jdk -y && \
+    apt-get install maven -y && \
     rm -rf /var/lib/apt/lists/*
 
 

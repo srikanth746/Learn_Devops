@@ -1,3 +1,14 @@
-FROM tomcat:9.0
+FROM ubuntu:latest
 
-COPY ROOT.war /usr/local/tomcat/webapps/
+#Installation of java dependenices .
+RUN apt-get update && \
+    apt-get install -y openjdk-11-jdk && \
+    apt-get install -y maven && \
+    rm -rf /var/lib/apt/lists/*
+
+
+RUN java -version
+
+RUN mvn clean install
+
+CMD echo "Java and maven installed successfully"

@@ -4,7 +4,6 @@ FROM ubuntu:latest
 RUN apt-get update && \
     apt-get install openjdk-11-jdk -y && \
     apt-get install wget -y && \
-    apt install tomcat9 -y && \
     rm -rf /var/lib/apt/lists/*
 
 RUN wget https://apache.osuosl.org/maven/maven-3/3.6.8/binaries/apache-maven-3.6.8-bin.tar.gz && \

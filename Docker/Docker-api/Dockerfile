@@ -9,6 +9,6 @@ RUN apt-get update && \
 
 RUN java -version
 
-RUN mvn clean install
+RUN mvn -version
 
 CMD echo "Java and maven installed successfully"

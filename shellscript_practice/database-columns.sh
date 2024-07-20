@@ -19,7 +19,7 @@ do
     if [[ "$col" == *"phone"* ]]; then
         # code to execute if condition is true
         echo "Masking the data for phone number"
-        mysql -u $USER -p$PASSWORD -h $HOST -D $DB_NAME -e "$SQL_QUERY"
+        mysql -u $USER -p$PASSWORD -h $HOST -D $DB_NAME -e "UPDATE $TABLE_NAME SET $col = CONCAT(REPEAT('X', LENGTH(phone_number) - 4), SUBSTR(phone_number, -4));"
 
     elif [[ "$col" == *"social"* ]]; then
         # code to execute if another_condition is true

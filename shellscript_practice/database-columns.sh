@@ -15,10 +15,10 @@ echo "Columns in table $TABLE_NAME:"
 for i in $COLUMNS
 do
     col=$(echo "$i" | tr '[:upper:]' '[:lower:]')
-    if [ "$col" == "phone_number" ]; then
+    if [[ "$col" == *"phone"* ]]; then
         # code to execute if condition is true
-        echo "Please mask the data"
-    elif [ "$col" == "social_security_number" ]; then
+        echo "Please mask the data for phone number"
+    elif [[ "$col" == *"social"* ]]; then
         # code to execute if another_condition is true
         echo "Please mask SSN"
     fi

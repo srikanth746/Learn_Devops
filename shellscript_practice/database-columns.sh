@@ -19,7 +19,12 @@ do
     if [[ "$col" == *"phone"* ]]; then
         # code to execute if condition is true
         echo "Masking the data for phone number"
-        mysql -u $USER -p$PASSWORD -h $HOST -D $DB_NAME -e "UPDATE $TABLE_NAME SET $col = CONCAT(REPEAT('X', LENGTH($col) - 4), SUBSTR($col, -4));"
+        mysql -u $USER -p$PASSWORD -h $HOST -D $DB_NAME -e
+        "UPDATE $TABLE_NAME SET $col = CONCAT(
+                                FLOOR(100 + (RAND() * 900)), '-',    -- Generate a 3-digit random number
+                                FLOOR(100 + (RAND() * 900)), '-',    -- Generate another 3-digit random number
+                                FLOOR(1000 + (RAND() * 9000))        -- Generate a 4-digit random number
+                            );"
 
     elif [[ "$col" == *"social"* ]]; then
         # code to execute if another_condition is true

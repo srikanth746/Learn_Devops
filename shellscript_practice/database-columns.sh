@@ -6,7 +6,7 @@ PASSWORD="50JSsv3XZMYp5z8XyqDR"
 HOST="data-masking.cbwgs6ucei2k.us-east-1.rds.amazonaws.com"
 DB_NAME="personal_db"
 TABLE_NAME="tmp_Users"
-START=$(date +%s)
+START=$(date +%s%N)
 # Fetch column names
 COLUMNS=$(mysql -u $USER -p$PASSWORD -h $HOST -D $DB_NAME -se "SHOW COLUMNS FROM $TABLE_NAME;" | awk '{print $1}')
 #SQL_QUERY="UPDATE $TABLE_NAME SET phone_number = CONCAT(REPEAT('X', LENGTH(phone_number) - 4), SUBSTR(phone_number, -4));"
@@ -39,8 +39,8 @@ do
     fi
 
 done
-END=$(date +%s)
+END=$(date +%s%N)
 
-DURATION=$((END - START))
+DURATION=$(( (END - START) / 1000000 ))
 
-echo "Time taken: $DURATION seconds"
+echo "Time taken: $DURATION milli-seconds"

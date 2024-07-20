@@ -27,9 +27,15 @@ do
         );"
 
 
-    elif [[ "$col" == *"social"* ]]; then
+    elif [[ "$col" == *"social_security"* ]]; then
         # code to execute if another_condition is true
         echo "Please mask SSN"
+        mysql -h "$HOST" -u "$USER" -p"$PASSWORD" "$DB_NAME" -e \
+                "UPDATE $TABLE_NAME SET $col = CONCAT(
+                    LPAD(FLOOR(RAND() * 900) + 100, 3, '0'), '-',
+                    LPAD(FLOOR(RAND() * 90) + 10, 2, '0'), '-',
+                    LPAD(FLOOR(RAND() * 9000) + 1000, 4, '0')
+                );"
     fi
 
 done

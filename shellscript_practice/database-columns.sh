@@ -7,7 +7,7 @@ HOST="data-masking.cbwgs6ucei2k.us-east-1.rds.amazonaws.com"
 DB_NAME="personal_db"
 TABLE_NAME="Loan_Users"
 OUTPUT_FILE="table_mask.csv"
-START=$(date +%s%N)
+START=$(date +%s)
 # Fetch column names
 COLUMNS=$(mysql -u $USER -p$PASSWORD -h $HOST -D $DB_NAME -se "SHOW COLUMNS FROM $TABLE_NAME;" | awk '{print $1}')
 #SQL_QUERY="UPDATE $TABLE_NAME SET phone_number = CONCAT(REPEAT('X', LENGTH(phone_number) - 4), SUBSTR(phone_number, -4));"
@@ -111,8 +111,10 @@ sed -e 's/),(/\
 # Clean up
 rm table_dump.sql
 
-END=$(date +%s%N)
+java -jar arx.jar -project config.xml -input "$OUTPUT_FILE" -output ./maskdata/masked_data_file.csv
 
-DURATION=$(( (END - START) / 1000000 ))
+END=$(date +%s)
 
-echo "Time taken: $DURATION milli-seconds"
+DURATION=$(( (END - START) ))
+
+echo "Time taken: $DURATION seconds"

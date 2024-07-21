@@ -111,7 +111,7 @@ sed -e 's/),(/\
 # Clean up
 rm table_dump.sql
 #java -Djava.library.path=/path/to/swt-libraries -jar arx.jar
-java -Djava.library.path=/usr/lib/jni/ -jar arx-3.9.1-gtk-64.jar -project config.xml -input "$OUTPUT_FILE" -output ./maskdata/masked_data_file.csv
+java -Djava.awt.headless=true -jar arx-3.9.1-gtk-64.jar -project config.xml -input "$OUTPUT_FILE" -output ./maskdata/masked_data_file.csv
 
 END=$(date +%s)
 

@@ -95,7 +95,7 @@ do
       echo "updating the address"
       for s in "${!states[@]}"; do
         abbreviation=${states[$s]}
-        mysql -u "$DB_USER" -p"$DB_PASSWORD" -D "$DB_NAME" -e "UPDATE $TABLE_NAME SET $col='$abbreviation' WHERE $col LIKE '%$s%';"
+        mysql -h "$HOST" -u "$USER" -p"$PASSWORD" "$DB_NAME" -e "UPDATE $TABLE_NAME SET $col='$abbreviation' WHERE $col LIKE '%$s%';"
       done
     fi
 

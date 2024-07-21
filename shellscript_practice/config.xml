@@ -1,0 +1,88 @@
+<arx:project xmlns:arx="https://arx.deidentifier.org/">
+    <arx:data>
+        <arx:attribute name="user_id" type="identifier"/>
+        <arx:attribute name="firstname" type="quasiIdentifier"/>
+        <arx:attribute name="lastname" type="quasiIdentifier"/>
+        <arx:attribute name="address" type="quasiIdentifier"/>
+        <arx:attribute name="phone_number" type="identifier"/>
+        <arx:attribute name="social_security_number" type="identifier"/>
+    </arx:data>
+
+    <arx:hierarchies>
+        <!-- Define the generalization hierarchy for the address column -->
+        <arx:hierarchy attribute="address">
+            <arx:level>
+                <arx:node>
+                    <arx:generalization from="Alabama" to="AL"/>
+                    <arx:generalization from="Alaska" to="AK"/>
+                    <arx:generalization from="Arizona" to="AZ"/>
+                    <arx:generalization from="Arkansas" to="AR"/>
+                    <arx:generalization from="California" to="CA"/>
+                    <arx:generalization from="Colorado" to="CO"/>
+                    <arx:generalization from="Connecticut" to="CT"/>
+                    <arx:generalization from="Delaware" to="DE"/>
+                    <arx:generalization from="Florida" to="FL"/>
+                    <arx:generalization from="Georgia" to="GA"/>
+                    <arx:generalization from="Hawaii" to="HI"/>
+                    <arx:generalization from="Idaho" to="ID"/>
+                    <arx:generalization from="Illinois" to="IL"/>
+                    <arx:generalization from="Indiana" to="IN"/>
+                    <arx:generalization from="Iowa" to="IA"/>
+                    <arx:generalization from="Kansas" to="KS"/>
+                    <arx:generalization from="Kentucky" to="KY"/>
+                    <arx:generalization from="Louisiana" to="LA"/>
+                    <arx:generalization from="Maine" to="ME"/>
+                    <arx:generalization from="Maryland" to="MD"/>
+                    <arx:generalization from="Massachusetts" to="MA"/>
+                    <arx:generalization from="Michigan" to="MI"/>
+                    <arx:generalization from="Minnesota" to="MN"/>
+                    <arx:generalization from="Mississippi" to="MS"/>
+                    <arx:generalization from="Missouri" to="MO"/>
+                    <arx:generalization from="Montana" to="MT"/>
+                    <arx:generalization from="Nebraska" to="NE"/>
+                    <arx:generalization from="Nevada" to="NV"/>
+                    <arx:generalization from="New Hampshire" to="NH"/>
+                    <arx:generalization from="New Jersey" to="NJ"/>
+                    <arx:generalization from="New Mexico" to="NM"/>
+                    <arx:generalization from="New York" to="NY"/>
+                    <arx:generalization from="North Carolina" to="NC"/>
+                    <arx:generalization from="North Dakota" to="ND"/>
+                    <arx:generalization from="Ohio" to="OH"/>
+                    <arx:generalization from="Oklahoma" to="OK"/>
+                    <arx:generalization from="Oregon" to="OR"/>
+                    <arx:generalization from="Pennsylvania" to="PA"/>
+                    <arx:generalization from="Rhode Island" to="RI"/>
+                    <arx:generalization from="South Carolina" to="SC"/>
+                    <arx:generalization from="South Dakota" to="SD"/>
+                    <arx:generalization from="Tennessee" to="TN"/>
+                    <arx:generalization from="Texas" to="TX"/>
+                    <arx:generalization from="Utah" to="UT"/>
+                    <arx:generalization from="Vermont" to="VT"/>
+                    <arx:generalization from="Virginia" to="VA"/>
+                    <arx:generalization from="Washington" to="WA"/>
+                    <arx:generalization from="West Virginia" to="WV"/>
+                    <arx:generalization from="Wisconsin" to="WI"/>
+                    <arx:generalization from="Wyoming" to="WY"/>
+                </arx:node>
+            </arx:level>
+        </arx:hierarchy>
+    </arx:hierarchies>
+
+    <arx:transformation>
+        <!-- Apply generalization to the address column -->
+        <arx:generalization>
+            <arx:attribute name="address" level="1"/>
+        </arx:generalization>
+    </arx:transformation>
+
+    <arx:privacy-models>
+        <!-- Example privacy model: k-Anonymity -->
+        <arx:privacy-model type="kAnonymity">
+            <arx:parameter name="k" value="5"/>
+        </arx:privacy-model>
+    </arx:privacy-models>
+
+    <arx:utility-measures>
+        <!-- Define utility measures, if any -->
+    </arx:utility-measures>
+</arx:project>

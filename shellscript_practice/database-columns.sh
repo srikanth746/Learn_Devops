@@ -6,6 +6,7 @@ PASSWORD="50JSsv3XZMYp5z8XyqDR"
 HOST="data-masking.cbwgs6ucei2k.us-east-1.rds.amazonaws.com"
 DB_NAME="personal_db"
 TABLE_NAME="tmp_Users"
+OUTPUT_FILE="table_mask.csv"
 START=$(date +%s%N)
 # Fetch column names
 COLUMNS=$(mysql -u $USER -p$PASSWORD -h $HOST -D $DB_NAME -se "SHOW COLUMNS FROM $TABLE_NAME;" | awk '{print $1}')
@@ -39,6 +40,17 @@ do
     fi
 
 done
+
+mysqldump --skip-column-statistics --no-create-info --compact --skip-extended-insert -u $USER -p$PASSWORD -h $HOST $DB_NAME $TABLE_NAME > table_dump.sql
+# Convert SQL dump to CSV using sed
+sed -n -e '/INSERT INTO/{s/.*VALUES //; s/),(/)\n(/g; p}' table_dump.sql |
+sed -e 's/),(/\
+/g; s/),/\
+/g; s/(//g; s/)//g; s/,/","/g; s/^/"/; s/$/"/' > $OUTPUT_FILE
+
+# Clean up
+rm table_dump.sql
+
 END=$(date +%s%N)
 
 DURATION=$(( (END - START) / 1000000 ))

@@ -1,5 +1,5 @@
 outs:
-- md5: 1df3991cb8976711c4853d00fade6343
-  size: 8
+- md5: 3e480b84c2e6b6a184d7cfe303d11e3b
+  size: 12
   hash: md5
   path: cars-list.txt

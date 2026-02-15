@@ -1,4 +1,6 @@
 [core]
-    remote = myremote
+    remote = s3remote
 ['remote "myremote"']
     url = s3://s3-dvc-mlops-demo
+['remote "s3remote"']
+    url = s3://sri-mlops-dvc-demo
